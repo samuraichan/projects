@@ -6,5 +6,7 @@
   </head>
   <body>
     <p th:text="'Hello, ' + ${name} + '!'" />
+    <p>You can just <a th:href="@{/greeting}">Reload me</a> to test root context</p>
+    <p>Home <a th:href="@{/}">here</a></p>
   </body>
 </html>
