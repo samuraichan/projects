@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starter.data.mapper.RiskMapper">
+
+	
+  <select id="findAll" resultType="starter.data.model.Risk">
+    SELECT
+      rh.risk_header_id AS id,
+      rh.named_Insured AS namedInsured,
+      rh.version_number AS versionNumber,
+      UPPER(status.name) AS status
+    FROM
+      risk_header rh,
+      status status
+    WHERE
+      rh.active_flag = 'Y' AND
+      status.status_id = rh.status_id 
+  </select>
+ 
+</mapper>
