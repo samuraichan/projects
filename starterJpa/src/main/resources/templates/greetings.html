@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <p th:text="'Hello, ' + ${name} + '!'" />
+    <p>You can just <a th:href="@{/greeting}">Reload me</a> to test root context</p>
+    <p>Home <a th:href="@{/}">here</a></p>
+    
+    <h3>Product list</h3>
+    <table>
+      <tr>
+        <th>Risk ID</th>
+        <th>NAMED INSURED</th>
+        <th>STATUS ID</th>
+      </tr>
+      <tr th:each="risk : ${risks}">
+        <td th:text="${risk.riskHeaderId}">Onions</td>
+        <td th:text="${risk.namedInsured}">2.41</td>
+        <td th:text="${risk.status}">2.41</td>
+      </tr>
+    </table>
+  </body>
+</html>
