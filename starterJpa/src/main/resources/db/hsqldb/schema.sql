@@ -35,5 +35,6 @@ CREATE TABLE status
   id INTEGER IDENTITY PRIMARY KEY,
   name VARCHAR(25),
   description VARCHAR(50),
-  active_flag VARCHAR(1)
+  active_flag VARCHAR(1),
+  version_number INTEGER
 );
