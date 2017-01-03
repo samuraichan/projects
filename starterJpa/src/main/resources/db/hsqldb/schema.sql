@@ -38,3 +38,11 @@ CREATE TABLE status
   active_flag VARCHAR(1),
   version_number INTEGER
 );
+
+CREATE TABLE book
+(
+  book_id INTEGER IDENTITY PRIMARY KEY,
+  title VARCHAR(25),
+  author VARCHAR(25),
+  isbn VARCHAR(25)
+)
