@@ -1,6 +1,8 @@
 # Starter
 
-Just started playing with Hibernate's envers.  Only initial checkin is completed. Nothing to show for now...
+Just started playing with Hibernate's envers. Created a Book entity and envers hooks into 
+the table BOOK_AUDIT and SYSTEM_REVISION. Both the audit table and revsion are populated 
+implicitly and are required by Hibernate.
 
 Generic Steps:
 

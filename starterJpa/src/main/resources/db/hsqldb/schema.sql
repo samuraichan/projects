@@ -46,3 +46,22 @@ CREATE TABLE book
   author VARCHAR(25),
   isbn VARCHAR(25)
 )
+
+CREATE TABLE book_aud
+(
+  book_aud_id INTEGER IDENTITY PRIMARY KEY, -- required by hibernate
+  book_id INTEGER,
+  title VARCHAR(25),
+  author VARCHAR(25),
+  isbn VARCHAR(25),
+  rev INTEGER, -- required by hibernate
+  revtype TINYINT, -- required by hibernate
+)
+
+-- see StarterRevisioinEntity.java (hibernate provides a default REVINFO tale if 
+-- @RevisionEntity is not provided by the app
+CREATE TABLE system_revision
+(
+  id INTEGER IDENTITY PRIMARY KEY,
+  timestamp BIGINT
+)
