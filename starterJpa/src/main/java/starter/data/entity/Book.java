@@ -27,8 +27,15 @@ public class Book {
   
   @Column(name = "isbn")
   private String isbn;
-
   
+  public Book(String author, String title, String isbn) {
+    this.author = author;
+    this.title = title;
+    this.isbn = isbn;
+  }
+  
+  public Book() {}
+
   public Integer getBookId() {
     return bookId;
   }
