@@ -3,6 +3,8 @@ package starter.riskheader;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+import java.util.Collection;
+
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import starter.data.entity.RiskBody;
 import starter.data.entity.RiskHeader;
 import starter.data.model.RiskStatus;
 import starter.repository.RiskHeaderRepository;
@@ -92,5 +95,18 @@ public class RiskHeaderTest {
 
     assertThat(riskHeaderRepository.count()).isEqualTo(records+1);
     assertThat(riskHeaderRepository.countByActive()).isEqualTo(records);
+  }
+  
+  @Test
+  public void testRiskWithSubmissions() {
+    RiskHeader risk = riskHeaderRepository.findById(1);
+    assertThat(risk).isNotNull();
+    
+    Collection<RiskBody> submissions = risk.getSubmissions();
+    submissions.size(); // will fail if fetch = FetchType.EAGER is not set
+    assertThat(submissions).isNotEmpty();
+    for (RiskBody riskBody : submissions) {
+      assertThat(riskBody.getRisk().getId()).isEqualTo(risk.getId());
+    }
   }
 }

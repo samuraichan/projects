@@ -1,12 +1,10 @@
 # Starter
 
-Just started playing with Hibernate's envers. Created a Book entity and envers hooks into 
-the table BOOK_AUDIT and SYSTEM_REVISION. Both the audit table and revsion are populated 
-implicitly and are required by Hibernate.
+Just started doing hierarchy class saving between a Risk / Submission.  
 
-Also added H2 console
+Note: running unit tests can't get the session transaction to work with Hibernate since by default uses lazy loading (ie, risk.getSubmissions). Running the full app Spring seems to enable OpenSessionInViewFilter.java which takes care of this issue.
 
-Note: simple bigint column to timestamp: select id, DATEADD('MILLISECOND', (timestamp/1000), DATE '1970-01-01') from system_revision;
+Next stage will be to understand how Hibernate envers works when saving a risk that only has its properties modified while submissions are left alone, etc.  Thus, need to add audit capability to Risk_Header and Risk_Body
 
 Generic Steps:
 

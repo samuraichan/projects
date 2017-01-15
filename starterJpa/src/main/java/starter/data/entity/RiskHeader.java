@@ -1,7 +1,11 @@
 package starter.data.entity;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import starter.data.model.RiskStatus;
@@ -19,6 +23,9 @@ public class RiskHeader extends BaseEntity {
   
   @Column(name="active_flag")
   private String activeFlag;
+  
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "risk" /*, fetch=FetchType.EAGER */)
+  private Collection<RiskBody> submissions;
   
   public RiskHeader() {}
   
@@ -55,5 +62,13 @@ public class RiskHeader extends BaseEntity {
 
   public void setActiveFlag(String activeFlag) {
     this.activeFlag = activeFlag;
+  }
+
+  public Collection<RiskBody> getSubmissions() {
+    return submissions;
+  }
+
+  public void setSubmissions(Collection<RiskBody> submissions) {
+    this.submissions = submissions;
   }
 }

@@ -1,5 +1,9 @@
 package starter.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import starter.data.entity.Book;
+import starter.data.entity.RiskBody;
+import starter.data.entity.RiskHeader;
 import starter.data.mapper.RiskMapper;
 import starter.repository.BookRepository;
+import starter.repository.RiskHeaderRepository;
 
 @Controller
 public class GreetingController {
@@ -18,6 +25,9 @@ public class GreetingController {
   
   @Autowired
   private BookRepository bookRepository;
+  
+  @Autowired
+  private RiskHeaderRepository riskHeaderRepository;
   
   
   @RequestMapping("/greeting")
@@ -34,6 +44,16 @@ public class GreetingController {
     bookRepository.save(book);
     Thread.sleep(2000);
     bookRepository.delete(book);
+    return "greetings";
+  }
+  
+  @RequestMapping("/lazy")
+  public String lazyLoad(Model model) throws InterruptedException {
+    RiskHeader risk = riskHeaderRepository.findById(1);
+   
+    for (RiskBody riskBody : risk.getSubmissions()) {
+      System.out.println(riskBody.getStatusId());
+    }
     return "greetings";
   }
 

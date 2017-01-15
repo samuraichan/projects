@@ -21,6 +21,8 @@ CREATE TABLE risk_body
   version_number INTEGER
 );
 
+ALTER TABLE risk_body ADD CONSTRAINT fk_risk_header FOREIGN KEY (risk_header_id) REFERENCES risk_header (id);
+
 CREATE TABLE endorsement 
 (
   id INTEGER IDENTITY PRIMARY KEY,
