@@ -2,6 +2,11 @@ DROP TABLE risk_header IF EXISTS;
 DROP TABLE risk_body IF EXISTS;
 DROP TABLE endorsement IF EXISTS;
 DROP TABLE status IF EXISTS;
+DROP TABLE risk_header_m IF EXISTS;
+DROP TABLE risk_body_m IF EXISTS;
+DROP TABLE quote_m IF EXISTS;
+DROP TABLE quote IF EXISTS;
+DROP TABLE system_revision IF EXISTS;
 
 CREATE TABLE risk_header 
 (
@@ -47,6 +52,30 @@ CREATE TABLE risk_body_m
   revtype TINYINT -- required by hibernate
 );
 
+CREATE TABLE quote 
+(
+  id INTEGER IDENTITY PRIMARY KEY,
+  risk_body_id INTEGER,
+  net_premium DECIMAL,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+ALTER TABLE quote ADD CONSTRAINT fk_risk_body FOREIGN KEY (risk_body_id) REFERENCES risk_body (id);
+
+CREATE TABLE quote_m
+(
+  mirror_id INTEGER IDENTITY PRIMARY KEY,
+  id INTEGER,
+  risk_body_id INTEGER,
+  net_premium DECIMAL,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype TINYINT -- required by hibernate
+);
+
+
 CREATE TABLE endorsement 
 (
   id INTEGER IDENTITY PRIMARY KEY,
@@ -73,3 +102,6 @@ CREATE TABLE system_revision
   id INTEGER IDENTITY PRIMARY KEY,
   timestamp BIGINT
 );
+
+--CREATE SEQUENCE HIBERNATE_SEQUENCE AS INTEGER--
+--START WITH 1 INCREMENT BY 1;

@@ -37,7 +37,7 @@ public class BaseEntity {
   
   @Version
   @Column(name="version_number")
-  protected Integer version;
+  protected Integer version = 1;
 
   public Integer getId() {
     return id;
