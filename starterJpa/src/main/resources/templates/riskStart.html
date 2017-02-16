@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    <h2>Hi You  have read RiskStart</h2>
+    
+    <h3>Risk Information</h3>
+    <table>
+      <tr>
+        <th>Risk ID</th>
+        <th>NAMED INSURED</th>
+        <th>STATUS ID</th>
+      </tr>
+      <tr th:each="risk : ${risks}">
+        <td th:text="${risk.riskHeaderId}">Onions</td>
+        <td th:text="${risk.namedInsured}">2.41</td>
+        <td th:text="${risk.status}">2.41</td>
+      </tr>
+    </table>
+    <br/><br/>
+    <form action="/starter/riskstart/save" method="post" th:object="${riskStart}">
+    
+      <label>first name</label><br/>
+      <input type="text" th:field="*{firstName}" />
+      <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect date</span>
+      
+      <br/><br/>
+      <label>last name</label><br/>
+      <input type="text" th:field="*{lastName}" />
+      <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect date</span>
+      
+      <br/><br/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
