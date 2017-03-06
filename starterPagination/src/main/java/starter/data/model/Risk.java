@@ -1,31 +1,13 @@
 package starter.data.model;
 
-public class Risk {
+import java.util.Date;
 
-  private Long riskHeaderId;
-  
-  private Long versionNumber;
+public class Risk {
   
   private String namedInsured;
   
   private RiskStatus status;
-
-  public Long getRiskHeaderId() {
-    return riskHeaderId;
-  }
-
-  public void setRiskHeaderId(Long riskHeaderId) {
-    this.riskHeaderId = riskHeaderId;
-  }
-
-  public Long getVersionNumber() {
-    return versionNumber;
-  }
-
-  public void setVersionNumber(Long versionNumber) {
-    this.versionNumber = versionNumber;
-  }
-
+  
   public String getNamedInsured() {
     return namedInsured;
   }

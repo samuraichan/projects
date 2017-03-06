@@ -1,7 +1,6 @@
 # Starter Pagination
 
-At this point, just testing (against MyBatis) the use of a simple pagination.  The class under test is just
-RiskMapper::findAllBySearchFilter(SearchFilter ...)
+At this point, just testing (against MyBatis) the use of a simple pagination.  The class under test is just RiskMapper
 
 Prerequisites
 
@@ -13,8 +12,9 @@ Generic Steps:
 
     git clone https://github.com/samuraichan/projects
     cd projects/starterPagination
-    mvn tests (7 successful tests should run)
+    mvn tests (23 successful tests should run)
     
 Next Steps:
-    1. more unit tests to be written to test filtering mechanism
-    2. use JPA instead of MyBatis(??)
+    1. more unit tests to be written to test DataTableOutput mechanism
+    2. more unit tests to start testing postgres LIMIT and OFFSET (see how this will integrate with
+       datatables API - specifically what params that will send upon pagination)
