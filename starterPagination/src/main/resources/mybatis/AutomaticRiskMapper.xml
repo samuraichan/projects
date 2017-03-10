@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="starter.data.mapper.AutomaticRiskMapper">
+
+  <select id="findAll" resultType="starter.data.model.AutomaticRisk">
+    SELECT
+      rh.named_Insured AS namedInsured,
+      arh.automatic_xml AS xml
+    FROM
+      automatic_risk_header arh,
+      risk_header rh
+    WHERE
+      arh.active_flag = 'Y' AND
+      rh.id = arh.risk_header_id AND
+      rh.active_flag = 'Y'
+  </select>
+  
+  <select id="findByRiskId" resultType="starter.data.model.AutomaticRisk">
+    SELECT
+      rh.named_Insured AS namedInsured,
+      arh.automatic_xml AS xml
+    FROM
+      automatic_risk_header arh,
+      risk_header rh
+    WHERE
+      arh.risk_header_id = #{riskId} AND
+      arh.active_flag = 'Y' AND
+      rh.id = arh.risk_header_id AND
+      rh.active_flag = 'Y'
+  </select>
+  
+ 
+</mapper>

@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS risk_header CASCADE;
 DROP TABLE IF EXISTS status CASCADE;
 DROP TABLE IF EXISTS risk_header_m CASCADE;
 DROP TABLE IF EXISTS system_revision CASCADE;
+DROP TABLE IF EXISTS automatic_risk_header CASCADE;
 DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(strategy = GenerationType.SEQUENCE) to work
 
 CREATE TABLE risk_header 
@@ -32,6 +33,15 @@ CREATE TABLE status
   id SERIAL PRIMARY KEY,
   name VARCHAR(25),
   description VARCHAR(50),
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE automatic_risk_header
+(
+  id SERIAL PRIMARY KEY,
+  risk_header_id INTEGER,
+  automatic_xml XML,
   active_flag VARCHAR(1),
   version_number INTEGER
 );
