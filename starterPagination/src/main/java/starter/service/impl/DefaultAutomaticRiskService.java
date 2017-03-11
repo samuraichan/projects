@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import starter.data.mapper.AutomaticRiskMapper;
 import starter.data.model.AutomaticRisk;
-import starter.data.multinational.data.MultinationalDocument;
+import starter.data.multinational.data.Document;
 import starter.service.AutomaticRiskService;
 
 @Service
@@ -35,9 +35,9 @@ public class DefaultAutomaticRiskService implements AutomaticRiskService {
   }
 
   @Override
-  public MultinationalDocument findMultinationalDocumentByRiskId(Integer riskId) throws Exception {
+  public Document findMultinationalDocumentByRiskId(Integer riskId) throws Exception {
     AutomaticRisk risk = findByRiskId(riskId);
-    return xmlConverter.getObjectMapper().readValue(risk.getXml(), MultinationalDocument.class);
+    return xmlConverter.getObjectMapper().readValue(risk.getXml(), Document.class);
   }
 
 }
