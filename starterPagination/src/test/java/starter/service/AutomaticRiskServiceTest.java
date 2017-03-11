@@ -16,7 +16,6 @@ public class AutomaticRiskServiceTest {
   @Autowired
   private AutomaticRiskService automaticRiskService;
   
-  
   @Test
   public void testCollectionIsNotEmpty() {
     assertThat(automaticRiskService.findAll()).isNotEmpty();
@@ -33,7 +32,7 @@ public class AutomaticRiskServiceTest {
   }
   
   @Test
-  public void testXMLDataIsNotNull() throws Exception {
-    assertThat(automaticRiskService.findDataByRiskId(1)).isNotNull();
+  public void testMultinationalDocumentIsNotNull() throws Exception {
+    assertThat(automaticRiskService.findMultinationalDocumentByRiskId(2)).isNotNull();
   }
 }

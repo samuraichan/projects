@@ -3,7 +3,7 @@ package starter.service;
 import java.util.Collection;
 
 import starter.data.model.AutomaticRisk;
-import starter.data.model.Data;
+import starter.data.multinational.data.MultinationalDocument;
 
 public interface AutomaticRiskService {
 
@@ -11,5 +11,5 @@ public interface AutomaticRiskService {
   
   public AutomaticRisk findByRiskId(Integer riskId);
   
-  public Data findDataByRiskId(Integer riskId) throws Exception;
+  public MultinationalDocument findMultinationalDocumentByRiskId(Integer riskId) throws Exception;
 }
