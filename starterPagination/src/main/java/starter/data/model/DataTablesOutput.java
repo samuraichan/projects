@@ -1,5 +1,8 @@
 package starter.data.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class DataTablesOutput {
@@ -32,7 +35,7 @@ public class DataTablesOutput {
    * ajaxDT option's dataSrc property.
    */
   
-  private List<Risk> data;
+  private List<Risk> data = new ArrayList<Risk>();
 
   /**
    * Optional: If an error occurs during the running of the server-side processing script, you can
@@ -80,5 +83,9 @@ public class DataTablesOutput {
 
   public void setError(String error) {
     this.error = error;
+  }
+  
+  public int getResultSize() {
+    return data.isEmpty() ? 0 : data.size();
   }
 }

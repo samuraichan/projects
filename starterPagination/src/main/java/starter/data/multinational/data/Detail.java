@@ -26,6 +26,7 @@ public class Detail {
     this.namedInsured = namedInsured;
   }
 
+  /** TODO: need to implement **/
   public Document getDocument() {
     return document;
   }

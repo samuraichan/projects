@@ -1,6 +1,9 @@
 package starter.data.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -180,10 +183,24 @@ public class RiskMapperTest {
   }
   
   @Test
-  public void testPaginationParamsLength() {
-    int offset = 10;
-    PaginationParams params = new PaginationParams(null, offset, null);
+  public void testPaginationParamsEmpty() {
+    PaginationParams params = new PaginationParams(null, null, null);
     assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
   }
   
+  @Test
+  public void testRecordsFilteredLength() {
+    int offset = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
+    PaginationParams params = new PaginationParams(null, offset, null);
+    assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getData().size()).isEqualTo(TOTAL_RISK_RECORDS - offset);
+  }
+  
+  @Test
+  public void testRecordFilteredExceptionMinOffset() {
+    int offset = Integer.MIN_VALUE;
+    PaginationParams params = new PaginationParams(null, offset, null);
+    assertThatThrownBy(() -> {
+      assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getData());}
+    ).isInstanceOf(Exception.class);
+  }
 }
