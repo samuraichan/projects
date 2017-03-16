@@ -21,13 +21,13 @@ import starter.data.model.SearchFilter;
 @SpringBootTest(webEnvironment=WebEnvironment.DEFINED_PORT)
 public class RiskMapperTest {
   
-  private static final int TOTAL_RISK_RECORDS = 20;
+  private static final int TOTAL_RISK_RECORDS = 34;
   
-  private static final int DRAFT_RISK_COUNT = 5;
+  private static final int DRAFT_RISK_COUNT = 8;
   
-  private static final int IN_PROGRESS_RISK_COUNT = 4;
+  private static final int IN_PROGRESS_RISK_COUNT = 6;
   
-  private static final int COMPLETED_RISK_COUNT = 11;
+  private static final int COMPLETED_RISK_COUNT = 20;
 
   @Autowired
   private RiskMapper riskMapper;
@@ -83,7 +83,7 @@ public class RiskMapperTest {
   public void testFilterEndDate() {
     DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(null, null, dateTime.toDate());
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(17);
+    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(31);
   }
   
   @Test
@@ -161,7 +161,7 @@ public class RiskMapperTest {
     DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(null, null, dateTime.toDate());
     PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(17);
+    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(31);
   }
   
   @Test

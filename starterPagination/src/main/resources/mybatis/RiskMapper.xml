@@ -68,7 +68,7 @@
   </select>
   
   <resultMap type="starter.data.model.DataTablesOutput" id="result-output">
-    <id property="recordsTotal" column="recordsTotal" />
+    <id property="recordsFiltered" column="recordsFiltered" />
     <collection property="data" ofType="starter.data.model.Risk">
       <result property="namedInsured" column="namedInsured"/>
       <result property="status" column="status"/>
@@ -77,7 +77,7 @@
   
   <select id="findDataTablesOutputByPaginationParams" resultMap="result-output">
     SELECT
-      COUNT(*) OVER() AS recordsTotal,
+      COUNT(*) OVER() AS recordsFiltered,
       rh.named_Insured AS namedInsured,
       UPPER(status.name) AS status
     FROM
@@ -99,6 +99,49 @@
     <if test="length != null">
       OFFSET #{length}
     </if>
+  </select>
+  
+  <select id="findDataTablesOutput" resultMap="result-output">
+    SELECT
+      COUNT(*) OVER() AS recordsFiltered,
+      rh.named_Insured AS namedInsured,
+      UPPER(status.name) AS status
+    FROM
+      risk_header rh,
+      status status
+    WHERE
+      rh.active_flag = 'Y' AND
+      status.id = rh.status_id
+      <if test="searchFilter != null &amp;&amp; searchFilter.statusId != null">
+        AND rh.status_id = #{searchFilter.statusId}
+      </if>
+      <if test="searchFilter != null &amp;&amp; searchFilter.startDate != null">
+        AND created_date &gt;= #{searchFilter.startDate}
+      </if>
+      <if test="searchFilter != null &amp;&amp; searchFilter.endDate != null">
+        AND created_date &lt;= #{searchFilter.endDate}
+      </if>
+      <if test="search != null &amp;&amp; search.value != null">
+        AND UPPER(rh.named_insured) like UPPER('%'||#{search.value}||'%')
+      </if>
+    ORDER BY rh.id
+    <if test="start != null">
+      OFFSET #{start}
+    </if>
+    <if test="length != null">
+      LIMIT #{length}
+    </if>
+  </select>
+  
+  <select id="findRecordCount" resultType="java.lang.Integer">
+    SELECT
+      COUNT(*)
+    FROM
+      risk_header rh,
+      status status
+    WHERE
+      rh.active_flag = 'Y' AND
+      status.id = rh.status_id
   </select>
  
 </mapper>

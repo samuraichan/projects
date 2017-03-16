@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import starter.data.model.DataTablesInput;
 import starter.data.model.DataTablesOutput;
 import starter.data.model.PaginationParams;
 import starter.data.model.Risk;
@@ -19,4 +20,8 @@ public interface RiskMapper {
   public List<Risk> findAllByPaginationParams(PaginationParams paginationParams);
   
   public DataTablesOutput findDataTablesOutputByPaginationParams(PaginationParams paginationParams);
+  
+  public DataTablesOutput findDataTablesOutput(DataTablesInput input);
+  
+  public Integer findRecordCount(DataTablesInput input);
 }

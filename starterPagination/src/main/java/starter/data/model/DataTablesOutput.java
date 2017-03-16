@@ -1,8 +1,6 @@
 package starter.data.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class DataTablesOutput {
@@ -14,7 +12,7 @@ public class DataTablesOutput {
    * parameter, in order to prevent Cross Site Scripting (XSS) attacks.
    */
   
-  private int draw;
+  private Integer draw;
 
   /**
    * Total records, before filtering (i.e. the total number of records in the database)
@@ -53,11 +51,11 @@ public class DataTablesOutput {
     this.data = data;
   }
 
-  public int getDraw() {
+  public Integer getDraw() {
     return draw;
   }
 
-  public void setDraw(int draw) {
+  public void setDraw(Integer draw) {
     this.draw = draw;
   }
 
