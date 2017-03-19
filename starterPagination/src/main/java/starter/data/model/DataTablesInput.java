@@ -1,5 +1,8 @@
 package starter.data.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.util.StringUtils;
 
 public class DataTablesInput {
@@ -27,6 +30,8 @@ public class DataTablesInput {
   private Integer length;
   
   private Search search;
+  
+  private Collection<Order> order = new ArrayList<Order>();
   
   private SearchFilter searchFilter;
   
@@ -82,5 +87,13 @@ public class DataTablesInput {
   
   public boolean initiatedByFilter() {
     return !StringUtils.isEmpty(getSearch().getValue()) || getSearchFilter() != null;
+  }
+
+  public Collection<Order> getOrder() {
+    return order;
+  }
+
+  public void setOrder(Collection<Order> order) {
+    this.order = order;
   }
 }

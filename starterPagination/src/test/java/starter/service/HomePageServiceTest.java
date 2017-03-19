@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import starter.data.model.DataTablesInput;
 import starter.data.model.DataTablesOutput;
+import starter.data.model.Search;
 
 
 @RunWith(SpringRunner.class)
@@ -29,23 +30,13 @@ private static final int TOTAL_RISK_RECORDS = 34;
   private static final int COMPLETED_RISK_COUNT = 11;
   
   private static final int NO_RECORDS = 0; 
+  
+  private static final int TWENTY_SEARCH_RECORDS = 10;
 
   @Autowired
   private HomePageService homePageService;
-  
-  @Test
-  public void testNullDataTablesInput() {
-    assertThat(homePageService.findDataTablesOutput(null).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
-  }
-  
-  @Test
-  public void testEmptyDataTablesInput() {
-    DataTablesInput input = new DataTablesInput();
-    assertThat(homePageService.findDataTablesOutput(input).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
-  }
-  
+    
   // Datatables start index TESTS
-  
   
   @Test 
   public void testDataTablesRandomStartIndex() {
@@ -62,6 +53,7 @@ private static final int TOTAL_RISK_RECORDS = 34;
     int start = TOTAL_RISK_RECORDS + 1;
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
+    assertThat(homePageService.findDataTablesOutput(input).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
     assertThat(homePageService.findDataTablesOutput(input).getData().size()).isEqualTo(NO_RECORDS);
   }
   
@@ -70,6 +62,7 @@ private static final int TOTAL_RISK_RECORDS = 34;
     int start = Integer.MAX_VALUE;
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
+    assertThat(homePageService.findDataTablesOutput(input).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
     assertThat(homePageService.findDataTablesOutput(input).getData().size()).isEqualTo(NO_RECORDS);
   }
   
@@ -93,26 +86,110 @@ private static final int TOTAL_RISK_RECORDS = 34;
   }
   
   @Test
-  public void testDataTablesStatIndexIncrementOfTen() { // this best mimics what datatables will send
-    int start[] = {10,20,30,40,50,60,70,80,90,100};
-    for (int i : start) {
-      DataTablesInput input = new DataTablesInput();
-      input.setStart(i);
-      
-      int compareTo = (i > TOTAL_RISK_RECORDS ? NO_RECORDS : (TOTAL_RISK_RECORDS - i));
-      assertThat(homePageService.findDataTablesOutput(input).getData().size()).isEqualTo(compareTo);
-    }
+  public void testDataTablesStatIndexIncrementOfTen0() { // this best mimics what datatables will send
+    int start = 0;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS);
   }
   
+  @Test
+  public void testDataTablesStatIndexIncrementOfTen1() { // this best mimics what datatables will send
+    int start = 10;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS - start);
+  }
+  
+  @Test
+  public void testDataTablesStatIndexIncrementOfTen2() { // this best mimics what datatables will send
+    int start = 20;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS - start);
+  }
+  
+  @Test
+  public void testDataTablesStatIndexIncrementOfTen3() { // this best mimics what datatables will send
+    int start = 30;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS - start);
+  }
+  
+  @Test
+  public void testDataTablesRandomStartIndexIncrementOfTen() { // this best mimics what datatables will send
+    int start = ThreadLocalRandom.current().nextInt(10, 30);
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS - start);
+  }
+  
+  @Test
+  public void testDataTablesStatIndexIncrementOfTen4() { // this best mimics what datatables will send
+    int start = 40;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(NO_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(NO_RECORDS);
+  }
+  
+  @Test
+  public void testDataTablesRandomStartIndexUpperBoundIncrementOfTen() { // this best mimics what datatables will send
+    int start = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(NO_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(NO_RECORDS);
+  }
+    
   // Datatables length index TESTS
   
   @Test 
-  public void testDataTablesRandomLengthIndex() {
-    int length = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
+  public void testDataTablesRandomLengthIndex1() {
+    int length = 1;
     DataTablesInput input = new DataTablesInput();
     input.setLength(length);
     DataTablesOutput output = homePageService.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(length);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+  }
+  
+  @Test 
+  public void testDataTablesRandomLengthIndex2() {
+    int length = 0;
+    DataTablesInput input = new DataTablesInput();
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(NO_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(NO_RECORDS);
   }
   
   @Test 
@@ -121,6 +198,7 @@ private static final int TOTAL_RISK_RECORDS = 34;
     DataTablesInput input = new DataTablesInput();
     input.setLength(length);
     assertThat(homePageService.findDataTablesOutput(input).getData().size()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(homePageService.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
   }
   
   @Test 
@@ -152,118 +230,152 @@ private static final int TOTAL_RISK_RECORDS = 34;
   
   // Datatables combination of length and start index(es) TESTS
   
-//  @Test
-//  public void testRecordsFilteredLength() {
-//    int offset = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
-//    PaginationParams params = new PaginationParams(null, offset, null);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS - offset);
-//  }
-//  
-//  @Test
-//  public void testRecordFilteredExceptionMinOffset() {
-//    int offset = Integer.MIN_VALUE;
-//    PaginationParams params = new PaginationParams(null, offset, null);
-//    assertThatThrownBy(() -> {
-//      assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered());}
-//    ).isInstanceOf(Exception.class);
-//  }
-//  
-//  @Test
-//  public void testEmptyFilter() {
-//    SearchFilter filter = new SearchFilter(null, null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
-//  }
-//  
-//  @Test
-//  public void testFilterDraftStatus() {
-//    SearchFilter filter = new SearchFilter(RiskStatus.DRAFT.getCode(), null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(8);
-//  }
-//  
-//  @Test
-//  public void testFilterNotExistMaxStatus() {
-//    SearchFilter filter = new SearchFilter(Integer.MAX_VALUE, null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(0);
-//  }
-//  
-//  @Test
-//  public void testFilterNotExistMinStatus() {
-//    SearchFilter filter = new SearchFilter(Integer.MIN_VALUE, null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(0);
-//  }
-//  
-//  @Test
-//  public void testFilterInProgressStatus() {
-//    SearchFilter filter = new SearchFilter(RiskStatus.INPROGRESS.getCode(), null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(6);
-//  }
-//  
-//  @Test
-//  public void testFilterCompletedStatus() {
-//    SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), null, null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(20);
-//  }
-//  
-//  @Test
-//  public void testFilterStartDate() {
-//    DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(null, dateTime.toDate(), null);
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(3);
-//  }
-//  
-//  @Test
-//  public void testFilterEndDate() {
-//    DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(null, null, dateTime.toDate());
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(31);
-//  }
-//  
-//  @Test
-//  public void testFilterRangeDate() {
-//    DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
-//    DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(null, startDate.toDate(), endDate.toDate());
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(2);
-//  }
-//  
-//  @Test
-//  public void testFilterCompletedStatusRangeDate() {
-//    DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
-//    DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), startDate.toDate(), endDate.toDate());
-//    PaginationParams params = new PaginationParams(null, null, filter);
-//    assertThat(homePageService.findDataTablesOutputByPaginationParams(params).getRecordsFiltered()).isEqualTo(1);
-//  }
-//  
-//  @Test
-//  public void testOutputCompletedStatusRangeDate() {
-//    DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
-//    DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), startDate.toDate(), endDate.toDate());
-//    DataTablesInput input = new DataTablesInput(null, null, null, null, filter);
-//    assertThat(homePageService.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(1);
-//  }
-//  
-//  @Test
-//  public void testOutputFilterEndDate() {
-//    DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
-//    SearchFilter filter = new SearchFilter(null, null, dateTime.toDate());
-//    DataTablesInput input = new DataTablesInput(null, null, 10, null, filter);
-//    assertThat(homePageService.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(10);
-//  }
-//  
-//  @Test
-//  public void testOutputFilterEndDateWithStartIndex() {
-//    DataTablesInput input = new DataTablesInput(null, 0, 10, new Search("th"), null);
-//    assertThat(homePageService.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(8);
-//  }
+  @Test 
+  public void testDataTablesRandomStartAndLengthIndex() {
+    int start = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
+    int length = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(output.getData().size() < length ? output.getData().size() : length);
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght() {
+    int start = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS - start);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1() {
+    int start = 0;
+    int length = 10;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(length);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1a() {
+    int start = 10;
+    int length = 10;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(length);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1b() {
+    int start = 10;
+    int length = 25;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(24);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1c() {
+    int start = 20;
+    int length = 25;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(14);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1d() {
+    int start = 25;
+    int length = 25;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(9);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1e() {
+    int start = 30;
+    int length = 5;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(4);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1f() {
+    int start = 30;
+    int length = 3;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(3);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1g() {
+    int start = 16;
+    int length = 20;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(18);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
+  
+  @Test 
+  public void testDataTablesFirstRecordWithStartAndLenght1h() {
+    int start = 16;
+    int length = 17;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    DataTablesOutput output = homePageService.findDataTablesOutput(input);
+    assertThat(output.getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+    assertThat(output.getData().size()).isEqualTo(17);
+    assertThat(output.getData().get(0).getNamedInsured()).startsWith(String.valueOf(start+1));
+  }
 }

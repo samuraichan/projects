@@ -3,8 +3,6 @@ package starter.data.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import starter.data.model.PaginationParams;
+import starter.data.model.DataTablesInput;
+import starter.data.model.DataTablesOutput;
 import starter.data.model.RiskStatus;
+import starter.data.model.Search;
 import starter.data.model.SearchFilter;
 
 @RunWith(SpringRunner.class)
@@ -28,55 +28,118 @@ public class RiskMapperTest {
   private static final int IN_PROGRESS_RISK_COUNT = 6;
   
   private static final int COMPLETED_RISK_COUNT = 20;
+  
+  private static final int NO_RECORDS = 0; 
+  
+  private static final int TWENTY_SEARCH_RECORDS = 10;
 
   @Autowired
   private RiskMapper riskMapper;
   
   @Test
-  public void testNullFilter() {
-    assertThat(riskMapper.findAllBySearchFilter(null)).isNotEmpty();
+  public void testNullDataTablesInput() {
+    assertThat(riskMapper.findDataTablesOutput(null).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
   }
   
   @Test
-  public void testEmptyFilter() {
-    assertThat(riskMapper.findAllBySearchFilter(new SearchFilter(null, null, null))).isNotEmpty();
+  public void testEmptyDataTablesInput() {
+    DataTablesInput input = new DataTablesInput();
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+  }
+    
+  @Test 
+  public void testDataTablesTotalRecordPlusStartIndex() {
+    int start = TOTAL_RISK_RECORDS + 1;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    assertThat(riskMapper.findDataTablesOutput(input)).isNull();
+  }
+  
+  @Test 
+  public void testDataTablesMaxStartIndex() {
+    int start = Integer.MAX_VALUE;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    assertThat(riskMapper.findDataTablesOutput(input)).isNull();
+  }
+  
+  @Test 
+  public void testDataTablesMinStartIndex() {
+    int start = Integer.MIN_VALUE;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+   
+    assertThatThrownBy(() -> {
+      riskMapper.findDataTablesOutput(input);}
+    ).isInstanceOf(Exception.class);
+  }
+  
+  @Test
+  public void testDataTablesStartIndexAtTotalRecord() {
+    int start = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    assertThat(riskMapper.findDataTablesOutput(input)).isNull();
+  }
+  
+  @Test
+  public void testDataTablesStatIndexIncrementOfTen() { // this best mimics what datatables will send
+    int start[] = {10,20,30};
+    for (int i : start) {
+      DataTablesInput input = new DataTablesInput();
+      input.setStart(i);
+      assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(TOTAL_RISK_RECORDS);
+      assertThat(riskMapper.findDataTablesOutput(input).getData().size()).isEqualTo(TOTAL_RISK_RECORDS - i);
+    }
   }
   
   @Test
   public void testFilterDraftStatus() {
     SearchFilter filter = new SearchFilter(RiskStatus.DRAFT.getCode(), null, null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(DRAFT_RISK_COUNT);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(DRAFT_RISK_COUNT);
   }
   
   @Test
   public void testFilterNotExistMaxStatus() {
     SearchFilter filter = new SearchFilter(Integer.MAX_VALUE, null, null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).isEmpty();;
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input)).isNull();
   }
   
   @Test
   public void testFilterNotExistMinStatus() {
     SearchFilter filter = new SearchFilter(Integer.MIN_VALUE, null, null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).isEmpty();;
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input)).isNull();
   }
   
   @Test
   public void testFilterInProgressStatus() {
     SearchFilter filter = new SearchFilter(RiskStatus.INPROGRESS.getCode(), null, null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(IN_PROGRESS_RISK_COUNT);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(IN_PROGRESS_RISK_COUNT);
   }
   
   @Test
   public void testFilterCompletedStatus() {
     SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), null, null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(COMPLETED_RISK_COUNT);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(COMPLETED_RISK_COUNT);
   }
   
   @Test
   public void testFilterStartDate() {
     DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(null, dateTime.toDate(), null);
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(3);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(3);
   }
   
   @Test
@@ -91,7 +154,9 @@ public class RiskMapperTest {
     DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
     DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(null, startDate.toDate(), endDate.toDate());
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(2);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(2);
   }
   
   @Test
@@ -99,108 +164,99 @@ public class RiskMapperTest {
     DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
     DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), startDate.toDate(), endDate.toDate());
-    assertThat(riskMapper.findAllBySearchFilter(filter)).size().isEqualTo(1);
+    DataTablesInput input = new DataTablesInput();
+    input.setSearchFilter(filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(1);
   }
   
   @Test
-  public void testNullPaginationParams() {
-    assertThat(riskMapper.findAllByPaginationParams(null)).isNotEmpty();
-  }
-  
-  @Test
-  public void testEmptyPaginationParams() {
-    PaginationParams params = new PaginationParams(null, null, null);
-    assertThat(riskMapper.findAllByPaginationParams(params)).isNotEmpty();
-  }
-  
-  @Test
-  public void testPaginationParamsDraftStatus() {
-    SearchFilter filter = new SearchFilter(RiskStatus.DRAFT.getCode(), null, null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(DRAFT_RISK_COUNT);
-  }
-  
-  @Test
-  public void testPaginationParamsNotExistMaxStatus() {
-    SearchFilter filter = new SearchFilter(Integer.MAX_VALUE, null, null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).isEmpty();;
-  }
-  
-  @Test
-  public void testPaginationParamsNotExistMinStatus() {
-    SearchFilter filter = new SearchFilter(Integer.MIN_VALUE, null, null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).isEmpty();;
-  }
-  
-  @Test
-  public void testPaginationParamsInProgressStatus() {
-    SearchFilter filter = new SearchFilter(RiskStatus.INPROGRESS.getCode(), null, null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(IN_PROGRESS_RISK_COUNT);
-  }
-  
-  @Test
-  public void testPaginationParamsCompletedStatus() {
-    SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), null, null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(COMPLETED_RISK_COUNT);
-  }
-  
-  @Test
-  public void testPaginationParamsStartDate() {
-    DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
-    SearchFilter filter = new SearchFilter(null, dateTime.toDate(), null);
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(3);
-  }
-  
-  @Test
-  public void testPaginationParamsEndDate() {
+  public void testOutputFilterEndDate() {
     DateTime dateTime = new DateTime(2017, 10, 16, 0, 0);
     SearchFilter filter = new SearchFilter(null, null, dateTime.toDate());
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(31);
+    DataTablesInput input = new DataTablesInput(null, null, 10, null, filter);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(31);
+  }
+  
+  // Datatables search filter
+  
+  @Test
+  public void testOutputFilterEndDateWithStartIndex() {
+    DataTablesInput input = new DataTablesInput(null, 0, 10, new Search("th"), null);
+    assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(8);
   }
   
   @Test
-  public void testPaginationParamsRangeDate() {
-    DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
-    DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
-    SearchFilter filter = new SearchFilter(null, startDate.toDate(), endDate.toDate());
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(2);
+  public void testDataTablesSearch() {
+    int start = 0;
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search(""));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS);
   }
   
   @Test
-  public void testPaginationParamsCompletedStatusRangeDate() {
-    DateTime startDate = new DateTime(2017, 10, 1, 0, 0);
-    DateTime endDate = new DateTime(2017, 10, 16, 0, 0);
-    SearchFilter filter = new SearchFilter(RiskStatus.COMPLETED.getCode(), startDate.toDate(), endDate.toDate());
-    PaginationParams params = new PaginationParams(null, null, filter);
-    assertThat(riskMapper.findAllByPaginationParams(params)).size().isEqualTo(1);
+  public void testDataTablesSearch2() {
+    int start = 0;
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search("twenty"));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(10);
   }
   
   @Test
-  public void testPaginationParamsEmpty() {
-    PaginationParams params = new PaginationParams(null, null, null);
-    assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getRecordsTotal()).isEqualTo(TOTAL_RISK_RECORDS);
+  public void testDataTablesSearch3() {
+    int start = 0;
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search("thirty"));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(5);
   }
   
   @Test
-  public void testRecordsFilteredLength() {
-    int offset = ThreadLocalRandom.current().nextInt(0, (TOTAL_RISK_RECORDS-1) + 1);
-    PaginationParams params = new PaginationParams(null, offset, null);
-    assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getData().size()).isEqualTo(TOTAL_RISK_RECORDS - offset);
+  public void testDataTablesSearch4() {
+    int start = 10;
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search("twenty"));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output).isNull();
   }
   
   @Test
-  public void testRecordFilteredExceptionMinOffset() {
-    int offset = Integer.MIN_VALUE;
-    PaginationParams params = new PaginationParams(null, offset, null);
-    assertThatThrownBy(() -> {
-      assertThat(riskMapper.findDataTablesOutputByPaginationParams(params).getData());}
-    ).isInstanceOf(Exception.class);
+  public void testDataTablesSearch5() {
+    int start = 5;
+    int length = TOTAL_RISK_RECORDS;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search("twenty"));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(5);
+    assertThat(output.getRecordsFiltered()).isEqualTo(10);
   }
+  
+  @Test
+  public void testDataTablesSearch6() {
+    int start = 5;
+    int length = 3;
+    DataTablesInput input = new DataTablesInput();
+    input.setStart(start);
+    input.setLength(length);
+    input.setSearch(new Search("twenty"));
+    DataTablesOutput output = riskMapper.findDataTablesOutput(input);
+    assertThat(output.getData().size()).isEqualTo(length);
+    assertThat(output.getRecordsFiltered()).isEqualTo(10);
+  }
+  
 }

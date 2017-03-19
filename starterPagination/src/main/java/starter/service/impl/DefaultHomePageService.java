@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import starter.data.mapper.RiskMapper;
 import starter.data.model.DataTablesInput;
 import starter.data.model.DataTablesOutput;
-import starter.data.model.PaginationParams;
 import starter.service.HomePageService;
 
 @Service
@@ -20,19 +19,6 @@ public class DefaultHomePageService implements HomePageService {
   }
 
   @Override
-  public DataTablesOutput findDataTablesOutputByPaginationParams(PaginationParams paginationParams) {
-    DataTablesOutput output = riskMapper.findDataTablesOutputByPaginationParams(paginationParams);
-    if (output == null) {
-      output = new DataTablesOutput();
-    }
-    else {
-      output.setRecordsFiltered(output.getResultSize());
-    }
-    
-    return output;
-  }
-
-  @Override
   public DataTablesOutput findDataTablesOutput(DataTablesInput input) {
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     if (output == null) output = new DataTablesOutput();
@@ -40,6 +26,4 @@ public class DefaultHomePageService implements HomePageService {
     
     return output;
   }
-  
-  
 }

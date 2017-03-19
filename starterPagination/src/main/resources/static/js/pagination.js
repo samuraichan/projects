@@ -9,7 +9,8 @@ $(document).ready(function() {
         },
         "columns": [
           { data: 'namedInsured'},
-          { data: 'status'}
+          { data: 'status'},
+          { data: 'createdDateString'}
         ]
     });
 } );
