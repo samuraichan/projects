@@ -10,6 +10,17 @@
     <script src="/starter/js/pagination.js"></script>
   </head>
   <body>
+    <select id="status" name="searchFilter.statusId">
+      <option value=""></option>
+      <option value="100">draft</option>
+      <option value="104">completed</option>
+    </select>
+    <p>
+      Start Date: <input type="text" id="startDate"></input>
+    </p>
+    <p>
+      End Date: <input type="text" id="endDate"></input>
+    </p>
     <table id="pagination" class="display" width="100%" cellspacing="0">
         <thead>
             <tr>

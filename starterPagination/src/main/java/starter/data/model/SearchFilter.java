@@ -10,6 +10,8 @@ public class SearchFilter {
   
   private Date endDate;
   
+  public SearchFilter() {}
+  
   public SearchFilter(Integer statusId, Date startDate, Date endDate) {
     this.statusId = statusId;
     this.startDate = startDate;

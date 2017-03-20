@@ -42,30 +42,7 @@
     ORDER BY rh.id
   </select>
   
-  <select id="findAllByPaginationParams" resultType="starter.data.model.Risk">
-    SELECT
-      rh.named_Insured AS namedInsured,
-      UPPER(status.name) AS status
-    FROM
-      risk_header rh,
-      status status
-    WHERE
-      rh.active_flag = 'Y' AND
-      status.id = rh.status_id
-      <if test="searchFilter != null &amp;&amp; searchFilter.statusId != null">
-        AND rh.status_id = #{searchFilter.statusId}
-      </if>
-      <if test="searchFilter != null &amp;&amp; searchFilter.startDate != null">
-        AND created_date &gt;= #{searchFilter.startDate}
-      </if>
-      <if test="searchFilter != null &amp;&amp; searchFilter.endDate != null">
-        AND created_date &lt;= #{searchFilter.endDate}
-      </if>
-    ORDER BY rh.id
-    <if test="length != null">
-      OFFSET #{length}
-    </if>
-  </select>
+  
   
   <resultMap type="starter.data.model.DataTablesOutput" id="result-output">
     <id property="recordsFiltered" column="recordsFiltered" />
@@ -75,32 +52,6 @@
       <result property="createdDate" column="createdDate"/>
     </collection>
   </resultMap>
-  
-  <select id="findDataTablesOutputByPaginationParams" resultMap="result-output">
-    SELECT
-      COUNT(*) OVER() AS recordsFiltered,
-      rh.named_Insured AS namedInsured,
-      UPPER(status.name) AS status
-    FROM
-      risk_header rh,
-      status status
-    WHERE
-      rh.active_flag = 'Y' AND
-      status.id = rh.status_id
-      <if test="searchFilter != null &amp;&amp; searchFilter.statusId != null">
-        AND rh.status_id = #{searchFilter.statusId}
-      </if>
-      <if test="searchFilter != null &amp;&amp; searchFilter.startDate != null">
-        AND created_date &gt;= #{searchFilter.startDate}
-      </if>
-      <if test="searchFilter != null &amp;&amp; searchFilter.endDate != null">
-        AND created_date &lt;= #{searchFilter.endDate}
-      </if>
-    ORDER BY rh.id
-    <if test="length != null">
-      OFFSET #{length}
-    </if>
-  </select>
   
   <select id="findDataTablesOutput" resultMap="result-output">
     SELECT
