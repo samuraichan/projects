@@ -21,8 +21,10 @@ public class DefaultHomePageService implements HomePageService {
   @Override
   public DataTablesOutput findDataTablesOutput(DataTablesInput input) {
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
-    if (output == null) output = new DataTablesOutput();
-    output.setRecordsTotal(riskMapper.findRecordCount(input));
+    if (output == null) {
+      output = new DataTablesOutput();
+      output.setRecordsTotal(riskMapper.findRecordCount(input));
+    }
     
     return output;
   }

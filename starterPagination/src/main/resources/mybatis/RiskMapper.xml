@@ -46,6 +46,7 @@
   
   <resultMap type="starter.data.model.DataTablesOutput" id="result-output">
     <id property="recordsFiltered" column="recordsFiltered" />
+    <result property="recordsTotal" column="recordsTotal"/>
     <collection property="data" ofType="starter.data.model.Risk">
       <result property="namedInsured" column="namedInsured"/>
       <result property="status" column="status"/>
@@ -55,30 +56,44 @@
   
   <select id="findDataTablesOutput" resultMap="result-output">
     SELECT
+      recordsTotal AS recordsTotal,
       COUNT(*) OVER() AS recordsFiltered,
-      rh.named_Insured AS namedInsured,
-      UPPER(status.name) AS status,
-      rh.created_date AS createdDate
+      namedInsured AS namedInsured,
+      status AS status,
+      createdDate AS createdDate
     FROM
-      risk_header rh,
-      status status
+      (
+        SELECT
+          COUNT(*) OVER() AS recordsTotal,
+          rh.id AS riskId,
+          rh.named_Insured AS namedInsured,
+          status.id AS statusId,
+          UPPER(status.name) AS status,
+          rh.created_date AS createdDate
+        FROM
+          risk_header rh,
+          status status
+        WHERE
+          rh.active_flag = 'Y' AND
+          status.id = rh.status_id
+      ) AS rc
     WHERE
-      rh.active_flag = 'Y' AND
-      status.id = rh.status_id
+      rc.namedInsured is not null
       <if test="searchFilter != null &amp;&amp; searchFilter.statusId != null">
-        AND rh.status_id = #{searchFilter.statusId}
+        AND rc.statusId = #{searchFilter.statusId}
       </if>
       <if test="searchFilter != null &amp;&amp; searchFilter.startDate != null">
-        AND created_date &gt;= #{searchFilter.startDate}
+        AND rc.createdDate &gt;= #{searchFilter.startDate}
       </if>
       <if test="searchFilter != null &amp;&amp; searchFilter.endDate != null">
-        AND created_date &lt;= #{searchFilter.endDate}
+        AND rc.createdDate &lt;= #{searchFilter.endDate}
       </if>
-      <if test="search != null &amp;&amp; search.value != null">
-        AND UPPER(rh.named_insured) like UPPER('%'||#{search.value}||'%')
+      <if test="search != null &amp;&amp; search.length() &gt; 0">
+        AND UPPER(rc.namedInsured) like UPPER('%'||#{search}||'%')
       </if>
     
-      ORDER BY <if test="order.size == 0">rh.id</if>
+      <if test="order != null">
+      ORDER BY <if test="order.size == 0">rc.riskId</if>
       <foreach item="item" collection="order" separator=" ">
         <if test="item.column == 0">
           namedInsured <if test="item.dir == 'asc'">ASC</if><if test="item.dir == 'desc'">DESC</if>
@@ -90,6 +105,7 @@
           createdDate <if test="item.dir == 'asc'">ASC</if><if test="item.dir == 'desc'">DESC</if>
         </if>
       </foreach>
+      </if>
    
     <if test="start != null">
       OFFSET #{start}

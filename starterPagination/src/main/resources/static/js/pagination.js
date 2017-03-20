@@ -1,8 +1,9 @@
 $(document).ready(function() {
 	
-    $('#pagination').DataTable( {
+    var table = $('#pagination').DataTable( {
         "processing": true,
         "serverSide": true,
+        "searching":   false,
         "ajax": {
           "url": "/starter/pagination",
           "type": "POST",
@@ -11,6 +12,7 @@ $(document).ready(function() {
               "searchFilter.statusId": $('#status option:selected').val(),
               "searchFilter.startDate": $('#startDate').val(),
               "searchFilter.endDate": $('#endDate').val(),
+              "search": $('#mySearch').val()
             });
           }
         },
@@ -19,6 +21,10 @@ $(document).ready(function() {
           { data: 'status'},
           { data: 'createdDateString'}
         ]
+    });
+    
+    $('#btn').on('click', function() {
+      table.draw();
     });
 } );
 

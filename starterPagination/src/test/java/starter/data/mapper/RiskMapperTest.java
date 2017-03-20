@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import starter.data.model.DataTablesInput;
 import starter.data.model.DataTablesOutput;
 import starter.data.model.RiskStatus;
-import starter.data.model.Search;
 import starter.data.model.SearchFilter;
 
 @RunWith(SpringRunner.class)
@@ -181,7 +180,7 @@ public class RiskMapperTest {
   
   @Test
   public void testOutputFilterEndDateWithStartIndex() {
-    DataTablesInput input = new DataTablesInput(null, 0, 10, new Search("th"), null);
+    DataTablesInput input = new DataTablesInput(null, 0, 10, "th", null);
     assertThat(riskMapper.findDataTablesOutput(input).getRecordsFiltered()).isEqualTo(8);
   }
   
@@ -192,7 +191,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search(""));
+    input.setSearch("");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(TOTAL_RISK_RECORDS);
   }
@@ -204,7 +203,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search("twenty"));
+    input.setSearch("twenty");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(10);
   }
@@ -216,7 +215,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search("thirty"));
+    input.setSearch("thirty");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(5);
   }
@@ -228,7 +227,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search("twenty"));
+    input.setSearch("twenty");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output).isNull();
   }
@@ -240,7 +239,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search("twenty"));
+    input.setSearch("twenty");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(5);
     assertThat(output.getRecordsFiltered()).isEqualTo(10);
@@ -253,7 +252,7 @@ public class RiskMapperTest {
     DataTablesInput input = new DataTablesInput();
     input.setStart(start);
     input.setLength(length);
-    input.setSearch(new Search("twenty"));
+    input.setSearch("twenty");
     DataTablesOutput output = riskMapper.findDataTablesOutput(input);
     assertThat(output.getData().size()).isEqualTo(length);
     assertThat(output.getRecordsFiltered()).isEqualTo(10);

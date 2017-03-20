@@ -29,7 +29,7 @@ public class DataTablesInput {
    */
   private Integer length;
   
-  private Search search;
+  private String search;
   
   private Collection<Order> order = new ArrayList<Order>();
   
@@ -37,7 +37,7 @@ public class DataTablesInput {
   
   public DataTablesInput() {}
   
-  public DataTablesInput(Integer draw, Integer start, Integer length, Search search, SearchFilter searchFilter) {
+  public DataTablesInput(Integer draw, Integer start, Integer length, String search, SearchFilter searchFilter) {
     this.draw = draw;
     this.start = start;
     this.length = length;
@@ -77,18 +77,14 @@ public class DataTablesInput {
     this.searchFilter = searchFilter;
   }
 
-  public Search getSearch() {
+  public String getSearch() {
     return search;
   }
 
-  public void setSearch(Search search) {
+  public void setSearch(String search) {
     this.search = search;
   }
   
-  public boolean initiatedByFilter() {
-    return !StringUtils.isEmpty(getSearch().getValue()) || getSearchFilter() != null;
-  }
-
   public Collection<Order> getOrder() {
     return order;
   }
