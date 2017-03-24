@@ -1,0 +1,260 @@
+/* Inputs and Forms */
+/* Inputs and Forms */
+input, textarea, select,
+input.textfield,
+.box .section textarea, 
+textarea {
+  padding: 6px 8px;
+  font-size: 13px;
+  }
+input.textfield.regular {
+  width: 135px !important;
+  }
+  
+input.textfield, textarea, select {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+label, select {
+  font-size: 13px;
+  }
+#summary table label {
+  font-size: 10px;
+}
+table.policy-structure {
+  background-color: #fff;
+  }
+table.policy-structure th {
+  vertical-align: bottom;
+  }
+table.policy-structure label {
+  white-space: normal;
+  }
+table.policy-structure .totals-row td {
+  padding: 10px 0;
+  }
+            
+.box .section {
+  font-size: 13px;
+  }
+.box h3 {
+  font-size: 14px;
+  padding: 10px 8px 10px 12px
+  }
+.box h2,
+.box-title {
+  padding: 8px 0 8px 12px; 
+  }
+.box h2,
+.box-title h2 {
+  font-size: 16px;
+  font-weight: normal;
+  }
+.box-title h2 {
+  padding: 0;
+  }
+  
+.box h2 span.box-sub-title { 
+  font-size: 16px;
+  color: #FFF;
+}
+
+.form-table td, .form-table th {
+  padding: 6px 6px 6px 0;
+  }
+  
+.btn-loading b {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -4px;
+  margin-left: -6px;
+  margin-right: .5em;
+  background: transparent url(../images/ajax-loader-sm.gif) 0 0 no-repeat;
+}
+
+.btn-loading-main b, .btn-loading b.main {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -4px;
+  margin-left: -6px;
+  margin-right: .5em;
+  background: transparent url(../images/ajax-loader-sm-orange.gif) 0 0 no-repeat;
+}
+
+.btn-loading-alt1 b, .btn-loading b.alt1 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-bottom: -4px;
+  margin-left: -6px;
+  margin-right: .5em;
+  background: transparent url(../images/ajax-loader-sm-blue.gif) 0 0 no-repeat;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  background: #999;
+}
+
+.textfield.frm-error, textarea.frm-error, select.frm-error {
+  border-color: #bd1a00;
+  background-color: #fcf3f2;
+}
+
+span.sm-label {
+  font-weight: normal;
+  color: #777;
+  padding-left:6px;
+}
+
+div.errormsg {
+  margin:.5em 0 0;
+  color: #dd4b39; 
+  line-height: 17px;
+}
+
+div.infomsg, span.infomsg {
+  margin:.5em 0 0;
+  color: #3c763d; 
+  line-height: 17px;
+  background: url(../images/ico-note.gif) 6px 6px no-repeat;
+  padding: 4px 0px 0px 24px;
+}
+
+input.textfield.frm-info {
+  background-color: #ffffec;
+}
+
+table.align-top tr {
+  vertical-align: top;
+}
+
+.errormsg {
+  display: none;
+}
+
+.help-pop {
+  margin-right: 5px;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+}
+
+input.textfield:focus, textarea:focus, select:focus {
+  outline-style:none;
+  box-shadow:none;
+  border-color:transparent;
+  box-shadow: 0 0 5px #51cbee;
+  border: 1px solid #51cbee;
+}
+
+hr.h-separator {
+  border: 0;
+  height: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.pdlist label.norm {
+  font-size: 11px; 
+}
+
+.clslmt td, .clslmt th  {
+  padding: 1px 2px 2px 3px;
+}
+
+/* hide IE 10+ input 'x' function */
+input.textfield::-ms-clear { 
+  display: none; 
+}
+
+/* attachment tables */
+.delete-lnk {
+   margin-left: 5px;
+   background: url(/images/ico-delete-drk.gif) 0 88% no-repeat;
+   padding-left: 18px;
+   margin-right: 12px;
+   cursor: pointer;
+ }
+ 
+.tbl-attachments td.btn-del {
+  background-color: #F8F8F8;
+}
+
+.tbl-attachments th {
+  color: #666; 	
+}
+ 
+.tbl-attachments td, .tbl-attachments th {
+  padding: 2px 6px;
+  text-align: left !important;
+}
+ 
+.tbl-attachments tbody td {
+  border: 1px solid #e1e1e1;
+}
+
+.tbl-attachments tbody.toupload tr.errorup td {
+  background-color: #faefef;
+  border: 1px solid #f8d7d7;
+}
+
+.tbl-attachments tbody.toupload tr.errorup td.description {
+  color: #a42121;
+  padding-left: 25px;
+  background-image: url(/images/ico-error-sm.png);
+  background-position: 5px 50%;
+  background-repeat: no-repeat;
+}
+ 
+.tbl-attachments td.filename span {
+  padding: 2px 4px 0 20px;
+  line-height: 1.3em;
+  background: url(/images/ico-filetypes.png) no-repeat 0 50%;
+  
+  /* height: 16px;  IE 7 Hack */
+  padding-top: 0; /* IE 7 Hack */
+}
+ 
+.tbl-attachments td.filename.ico-pdf span { background-position: 0 -150px; }     
+.tbl-attachments td.filename.ico-doc span { background-position: 0 -200px; }     
+.tbl-attachments td.filename.ico-docx span { background-position: 0 -250px; }  
+.tbl-attachments td.filename.ico-dot span { background-position: 0 -300px; }     
+.tbl-attachments td.filename.ico-xls span { background-position: 0 -350px; }       
+.tbl-attachments td.filename.ico-xlsx span { background-position: 0 -400px; }    
+.tbl-attachments td.filename.ico-xlt span { background-position: 0 -450px; }       
+.tbl-attachments td.filename.ico-ppt span { background-position: 0 -500px; }     
+.tbl-attachments td.filename.ico-pptx span { background-position: 0 -550px; }   
+.tbl-attachments td.filename.ico-pot span { background-position: 0 -600px; }     
+.tbl-attachments td.filename.ico-gif span { background-position: 0 -650px; }       
+.tbl-attachments td.filename.ico-jpg span { background-position: 0 -700px; }      
+.tbl-attachments td.filename.ico-tif span { background-position: 0 -750px; }        
+.tbl-attachments td.filename.ico-bmp span { background-position: 0 -800px; }   
+.tbl-attachments td.filename.ico-txt span { background-position: 0 -850px; }      
+.tbl-attachments td.filename.ico-rtf span { background-position: 0 -900px; }       
+.tbl-attachments td.filename.ico-htm span { background-position: 0 -950px; }    
+.tbl-attachments td.filename.ico-mht span { background-position: 0 -1000px; }
+.tbl-attachments td.filename.ico-mp3 span { background-position: 0 -1050px; } 
+.tbl-attachments td.filename.ico-zip span { background-position: 0 -1100px; }    
+.tbl-attachments td.filename.ico-comp span { background-position: 0 -1150px; }              
+.tbl-attachments td.filename.ico-log span { background-position: 0 -1200px; }
+.tbl-attachments td.filename.ico-xml span { background-position: 0 -1250px; }  
+.tbl-attachments td.filename.ico-xsl span { background-position: 0 -1300px; } 
+  
+a.btn-img.btn-disabled {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  /* IE 5-7 */
+  filter: alpha(opacity=50);
+  /* Good browsers */
+  opacity: 0.5;
+  cursor: default;
+}
+  
+a:hover.btn-img.btn-disabled:hover {
+  background-position:0 0;
+}
