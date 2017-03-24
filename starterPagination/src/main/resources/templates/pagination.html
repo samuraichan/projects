@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Getting Started: pagination</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></link>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="/starter/js/jquery.spring-friendly.min.js"></script>
+    <script src="/starter/js/pagination.js"></script>
+  </head>
+  <body>
+    <div id="" class=""><label>Search:<input id="mySearch" class="" placeholder="" aria-controls=""></input></label></div>
+    <p>
+      <select id="status" name="searchFilter.statusId">
+        <option value=""></option>
+        <option value="100">draft</option>
+        <option value="104">completed</option>
+      </select>
+    </p>
+    <p>
+      Start Date: <input type="text" id="startDate"></input>
+    </p>
+    <p>
+      End Date: <input type="text" id="endDate"></input>
+    </p>
+    <p>
+      <button id="btn">Click Me</button>
+    </p>
+    <table id="pagination" class="display" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Named Insured</th>
+                <th>Status</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+    </table>
+  </body>
+</html>

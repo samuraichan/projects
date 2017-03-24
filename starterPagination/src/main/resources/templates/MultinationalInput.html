@@ -1,0 +1,808 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>eReinsure :: Multinational</title>
+  <meta http-equiv="Expires" content="0"/>
+  <meta http-equiv="Last-Modified" content="0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <link rel="shortcut icon" type="/image/ico" href="/favicon.ico"/>
+  <link type="text/css" rel="stylesheet" href="/starter/css/screen.css"/>
+  <link type="text/css" rel="stylesheet" href="/starter/css/screen-supplement.css"/>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+  
+  
+  
+<body>
+  <div id="container">
+    <div id="header">
+      <div id="logo">
+        <img src="/starter/images/erelogo-print.gif" width="199" height="32" alt="" />
+        <div id="utils">
+          <ul></ul>
+        </div>
+      </div>
+      <ul id="nav"></ul>
+    </div>
+    <div id="content">
+      <h1>Multinational Definitive Advice I</h1>
+      <div class="box  btmspace " id="">
+        <div class="box-top"></div>
+        <div class="box-middle">
+          <h2>MDA I</h2>
+          <h3>Account Information</h3>
+          <div class="section">
+            <table class="form-table ">
+              <tbody>
+                <tr>
+                  <td><label>MDA Number<span class="required">*</span></label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Account/Number@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Master Account Name<span class="required">*</span></label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Account/Name@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Local Insured Name<span class="required">*</span></label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Account/InsuredName@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td class="v-top"><label>Additional Local Insureds</label></td>
+                  <td><textarea name="/Risk/AutomaticRiskData/automaticXML/Account/Insureds@Risk" rows="4" cols="40" class="textarea max-width"></textarea></td>
+                </tr>
+                <tr>
+                  <td><label>Line of Business<span class="required">*</span></label></td>
+                  <td><select class="sel-policytype" name="/Risk/AutomaticRiskData/automaticXML/Account/LineOfBusinessId@Risk"><option value="">Select One</option>
+                      <option value="82140490">AMT (Advanced Medical Technology)</option>
+                      <option value="82140459">Casualty</option>
+                      <option value="82140492">Clinical Trials</option>
+                      <option value="82140483">D&amp;O (Directors and Officers Liability)</option>
+                      <option value="84387494">FOS</option>
+                      <option value="82140475">Marine Hull/Liability/Cargo</option>
+                      <option value="82140481">Motor</option>
+                      <option value="84387492">Package</option>
+                      <option value="82140485">Professional (Errors and Omissions)</option>
+                      <option value="82140427">Property</option>
+                      <option value="82140487">Surety</option>
+                      <option value="82140511">Umbrella and UK Terrorism</option>
+                      <option value="82140508">Warranty</option>
+                      <option value="82140468">Workers' Compensation/Employers Liability</option></select><input type="hidden"
+                    name="/Risk/AutomaticRiskData/automaticXML/Account/LineOfBusiness@Risk" class="i-policytype" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Country<span class="required">*</span></label></td>
+                  <td><select name="/Risk/AutomaticRiskData/automaticXML/Account/Country@Risk" class="sel-init" data-selected=""><option value="">Select One</option>
+                      <option value="Albania">Albania</option>
+                      <option value="Algeria">Algeria</option>
+                      <option value="American Samoa">American Samoa</option>
+                      <option value="Andorra">Andorra</option>
+                      <option value="Angola">Angola</option>
+                      <option value="Anguilla">Anguilla</option>
+                      <option value="Antarctica">Antarctica</option>
+                      <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Armenia">Armenia</option>
+                      <option value="Aruba">Aruba</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Austria">Austria</option>
+                      <option value="Azerbaijan">Azerbaijan</option>
+                      <option value="Bahamas">Bahamas</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="Barbados">Barbados</option>
+                      <option value="Belarus">Belarus</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="Belize">Belize</option>
+                      <option value="Benin">Benin</option>
+                      <option value="Bermuda">Bermuda</option>
+                      <option value="Bhutan">Bhutan</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                      <option value="Botswana">Botswana</option>
+                      <option value="Bouvet Island">Bouvet Island</option>
+                      <option value="Brazil">Brazil</option>
+                      <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Bulgaria">Bulgaria</option>
+                      <option value="Burkina Faso">Burkina Faso</option>
+                      <option value="Burma">Burma</option>
+                      <option value="Burundi">Burundi</option>
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="Cameroon">Cameroon</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Cape Verde">Cape Verde</option>
+                      <option value="Cayman Islands">Cayman Islands</option>
+                      <option value="Central African Republic">Central African Republic</option>
+                      <option value="Chad">Chad</option>
+                      <option value="Chile">Chile</option>
+                      <option value="China">China</option>
+                      <option value="Christmas Island">Christmas Island</option>
+                      <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Comoros">Comoros</option>
+                      <option value="Congo">Congo</option>
+                      <option value="Congo, The Democratic Republic of the">Congo, The Democratic Republic of the</option>
+                      <option value="Cook Islands">Cook Islands</option>
+                      <option value="Costa Rica">Costa Rica</option>
+                      <option value="Cote d'Ivoire">Cote d'Ivoire</option>
+                      <option value="Croatia">Croatia</option>
+                      <option value="Cuba">Cuba</option>
+                      <option value="Cyprus">Cyprus</option>
+                      <option value="Czech Republic">Czech Republic</option>
+                      <option value="Denmark">Denmark</option>
+                      <option value="Djibouti">Djibouti</option>
+                      <option value="Dominica">Dominica</option>
+                      <option value="Dominican Republic">Dominican Republic</option>
+                      <option value="East Timor">East Timor</option>
+                      <option value="Ecuador">Ecuador</option>
+                      <option value="Egypt">Egypt</option>
+                      <option value="El Salvador">El Salvador</option>
+                      <option value="Equatorial Guinea">Equatorial Guinea</option>
+                      <option value="Estonia">Estonia</option>
+                      <option value="Ethiopia">Ethiopia</option>
+                      <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                      <option value="Faroe Islands">Faroe Islands</option>
+                      <option value="Fiji">Fiji</option>
+                      <option value="Finland">Finland</option>
+                      <option value="France">France</option>
+                      <option value="French Guiana">French Guiana</option>
+                      <option value="French Polynesia">French Polynesia</option>
+                      <option value="French Southern Territories">French Southern Territories</option>
+                      <option value="Gabon">Gabon</option>
+                      <option value="Gambia">Gambia</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Ghana">Ghana</option>
+                      <option value="Gibraltar">Gibraltar</option>
+                      <option value="Greece">Greece</option>
+                      <option value="Greenland">Greenland</option>
+                      <option value="Grenada">Grenada</option>
+                      <option value="Guadeloupe">Guadeloupe</option>
+                      <option value="Guam">Guam</option>
+                      <option value="Guatemala">Guatemala</option>
+                      <option value="Guinea">Guinea</option>
+                      <option value="Guinea-Bissau">Guinea-Bissau</option>
+                      <option value="Guyana">Guyana</option>
+                      <option value="Haiti">Haiti</option>
+                      <option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option>
+                      <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                      <option value="Honduras">Honduras</option>
+                      <option value="Hong Kong">Hong Kong</option>
+                      <option value="Hungary">Hungary</option>
+                      <option value="Iceland">Iceland</option>
+                      <option value="India">India</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                      <option value="Iraq">Iraq</option>
+                      <option value="Ireland">Ireland</option>
+                      <option value="Israel">Israel</option>
+                      <option value="Italy">Italy</option>
+                      <option value="Jamaica">Jamaica</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Johnston Atoll and Midway">Johnston Atoll and Midway</option>
+                      <option value="Johnston island">Johnston island</option>
+                      <option value="Jordan">Jordan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Kenya">Kenya</option>
+                      <option value="Kiribati">Kiribati</option>
+                      <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                      <option value="Korea, Republic Of">Korea, Republic Of</option>
+                      <option value="Kuwait">Kuwait</option>
+                      <option value="Kyrgyzstan">Kyrgyzstan</option>
+                      <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                      <option value="Latvia">Latvia</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Lesotho">Lesotho</option>
+                      <option value="Liberia">Liberia</option>
+                      <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                      <option value="Liechtenstein">Liechtenstein</option>
+                      <option value="Lithuania">Lithuania</option>
+                      <option value="Luxembourg">Luxembourg</option>
+                      <option value="Macau">Macau</option>
+                      <option value="Madagascar">Madagascar</option>
+                      <option value="Malawi">Malawi</option>
+                      <option value="Malaysia">Malaysia</option>
+                      <option value="Maldives">Maldives</option>
+                      <option value="Mali">Mali</option>
+                      <option value="Malta">Malta</option>
+                      <option value="Marshall Islands">Marshall Islands</option>
+                      <option value="Martinique">Martinique</option>
+                      <option value="Mauritania">Mauritania</option>
+                      <option value="Mauritius">Mauritius</option>
+                      <option value="Mayotte">Mayotte</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Micronesia, Federated States Of">Micronesia, Federated States Of</option>
+                      <option value="Midway islands">Midway islands</option>
+                      <option value="Moldova, Republic Of">Moldova, Republic Of</option>
+                      <option value="Monaco">Monaco</option>
+                      <option value="Mongolia">Mongolia</option>
+                      <option value="Montserrat">Montserrat</option>
+                      <option value="Morocco">Morocco</option>
+                      <option value="Mozambique">Mozambique</option>
+                      <option value="Myanmar">Myanmar</option>
+                      <option value="Namibia">Namibia</option>
+                      <option value="Nauru">Nauru</option>
+                      <option value="Nepal">Nepal</option>
+                      <option value="Netherlands">Netherlands</option>
+                      <option value="Netherlands Antilles">Netherlands Antilles</option>
+                      <option value="Neutral Zone">Neutral Zone</option>
+                      <option value="New Caledonia">New Caledonia</option>
+                      <option value="New Zealand">New Zealand</option>
+                      <option value="Nicaragua">Nicaragua</option>
+                      <option value="Niger">Niger</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="Niue">Niue</option>
+                      <option value="Norfolk Island">Norfolk Island</option>
+                      <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                      <option value="Norway">Norway</option>
+                      <option value="Oman">Oman</option>
+                      <option value="Pacific islands">Pacific islands</option>
+                      <option value="Pacific islands, miscellaneous, USA">Pacific islands, miscellaneous, USA</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Palau">Palau</option>
+                      <option value="Panama">Panama</option>
+                      <option value="Papua New Guinea">Papua New Guinea</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Peru">Peru</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Pitcairn">Pitcairn</option>
+                      <option value="Poland">Poland</option>
+                      <option value="Portugal">Portugal</option>
+                      <option value="Puerto Rico">Puerto Rico</option>
+                      <option value="Qatar">Qatar</option>
+                      <option value="Queen Maud's Territory (Antarctic)">Queen Maud's Territory (Antarctic)</option>
+                      <option value="Reunion">Reunion</option>
+                      <option value="Romania">Romania</option>
+                      <option value="Russian Federation">Russian Federation</option>
+                      <option value="Rwanda">Rwanda</option>
+                      <option value="Saint Helena">Saint Helena</option>
+                      <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                      <option value="Saint Lucia">Saint Lucia</option>
+                      <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                      <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                      <option value="Samoa">Samoa</option>
+                      <option value="San Marino">San Marino</option>
+                      <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                      <option value="Saudi Arabia">Saudi Arabia</option>
+                      <option value="Senegal">Senegal</option>
+                      <option value="Seychelles">Seychelles</option>
+                      <option value="Sierra Leone">Sierra Leone</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="Slovakia">Slovakia</option>
+                      <option value="Slovenia">Slovenia</option>
+                      <option value="Solomon Islands">Solomon Islands</option>
+                      <option value="Somalia">Somalia</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="Spain">Spain</option>
+                      <option value="Sri Lanka">Sri Lanka</option>
+                      <option value="Sudan">Sudan</option>
+                      <option value="Suriname">Suriname</option>
+                      <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                      <option value="Swaziland">Swaziland</option>
+                      <option value="Sweden">Sweden</option>
+                      <option value="Switzerland">Switzerland</option>
+                      <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                      <option value="Taiwan">Taiwan</option>
+                      <option value="Tajikistan">Tajikistan</option>
+                      <option value="Tanzania, United Republic Of">Tanzania, United Republic Of</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Togo">Togo</option>
+                      <option value="Tokelau">Tokelau</option>
+                      <option value="Tonga">Tonga</option>
+                      <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                      <option value="Tunisia">Tunisia</option>
+                      <option value="Turkey">Turkey</option>
+                      <option value="Turkmenistan">Turkmenistan</option>
+                      <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                      <option value="Tuvalu">Tuvalu</option>
+                      <option value="Uganda">Uganda</option>
+                      <option value="Ukraine">Ukraine</option>
+                      <option value="United Arab Emirates">United Arab Emirates</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="United States">United States</option>
+                      <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Uzbekistan">Uzbekistan</option>
+                      <option value="Vanuatu">Vanuatu</option>
+                      <option value="Venezuela">Venezuela</option>
+                      <option value="Viet Nam">Viet Nam</option>
+                      <option value="Virgin Islands, British">Virgin Islands, British</option>
+                      <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                      <option value="Wake island">Wake island</option>
+                      <option value="Wallis and Futuna">Wallis and Futuna</option>
+                      <option value="Western Sahara">Western Sahara</option>
+                      <option value="Yemen">Yemen</option>
+                      <option value="Yugoslavia">Yugoslavia</option>
+                      <option value="Zambia">Zambia</option>
+                      <option value="Zimbabwe">Zimbabwe</option></select></td>
+                </tr>
+                <tr>
+                  <td class="v-top"><label>Business Activity<span class="required">*</span></label></td>
+                  <td><textarea name="/Risk/AutomaticRiskData/automaticXML/Account/Activity@Risk" rows="4" cols="40" class="textarea max-width"></textarea></td>
+                </tr>
+                <tr>
+                  <td><label>Controlling Office<span class="required">*</span></label></td>
+                  <td>
+                    <select name="/Risk/AutomaticRiskData/automaticXML/Account/ControllingOffice@Risk" class="sel-init" data-selected="">
+                      <option value="">Select One</option>
+                      <option value="US">US</option>
+                      <option value="Canada">Canada</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Local Carrier</h3>
+          <div class="section">
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <td><label>Local Company<span class="required">*</span></label></td>
+                  <td>
+                    <select name="/Risk/AutomaticRiskData/automaticXML/Local/Underwriter/CompanyId@Risk" id="localCompany" class="sel-init" data-selected="">
+                      <option value="">Select One</option>
+                      <option value="83301981">CNA Canada</option>
+                      <option value="83303640">CNA Insurance Company Limited (Denmark)</option>
+                      <option value="83304791">CNA Insurance Company Limited (Germany)</option>
+                      <option value="83305270">CNA Insurance Company Limited (Ireland)</option>
+                      <option value="83305762">CNA Insurance Company Limited (Norway)</option>
+                      <option value="83306508">CNA Insurance Company Limited (Sweden)</option>
+                      <option value="83307027">CNA Insurance Company Limited (Switzerland)</option>
+                      <option value="83312840">CNA Insurance Company Limited (United Kingdom)</option>
+                      <option value="83313825">The Continental Corporation (Shanghai)</option></select><input type="hidden" class="sel-hidden"
+                    name="/Risk/AutomaticRiskData/automaticXML/Local/Underwriter/CompanyName@Risk" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Local Contact<span class="required">*</span></label></td>
+                  <td><select name="/Risk/AutomaticRiskData/automaticXML/Local/Underwriter/UnderwriterId@Risk" id="localUnderwriter" class="sel-init" data-selected=""><option
+                        value="">Select One</option>
+                      <option value="83302592" class="83301981">Das, Indranie</option>
+                      <option value="104957913" class="83301981">Rubinas, Arlene</option>
+                      <option value="104957692" class="83301981">Santamaria, Gus</option>
+                      <option value="104957781" class="83301981">Lefebvre, Camie</option>
+                      <option value="102817988" class="83301981">Krumdick, Mark</option>
+                      <option value="102817789" class="83301981">Fama, Fioralba</option>
+                      <option value="83302841" class="83301981">Zita, Jana</option>
+                      <option value="83302735" class="83301981">Fernandes, Catherine</option>
+                      <option value="83304531" class="83303640">Cen, Geena</option>
+                      <option value="83305172" class="83304791">Mueller, Benjamin</option>
+                      <option value="84391254" class="83304791">Hartmann, Andre</option>
+                      <option value="83305661" class="83305270">Banerjee, Mahua</option>
+                      <option value="84391722" class="83305270">Suthagaran, Sucanra</option>
+                      <option value="83306177" class="83305762">Cen, Geena</option>
+                      <option value="83306864" class="83306508">Cen, Geena</option>
+                      <option value="84392587" class="83307027">Suthagaran, Sucanra</option>
+                      <option value="83307504" class="83307027">Banerjee, Mahua</option>
+                      <option value="83368228" class="83312840">Percival, Martin</option>
+                      <option value="84392226" class="83312840">Suthagaran, Sucanra</option>
+                      <option value="104959721" class="83312840">Wells, Jacob</option>
+                      <option value="83313699" class="83312840">Banerjee, Mahua</option>
+                      <option value="84391034" class="83313825">Du, May</option>
+                      <option value="83314263" class="83313825">Liu, Rebecca</option></select><input type="hidden" class="sel-hidden"
+                    name="/Risk/AutomaticRiskData/automaticXML/Local/Underwriter/UnderwriterName@Risk" value="" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Local Broker Information</h3>
+          <div class="section">
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <td><label>Local Broker Name</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Name@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Local Broker Address</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Address@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Phone</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Phone@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Fax</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Fax@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Email</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Email@Risk" class="textfield large" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Local Broker Contact</label></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Broker/Contact@Risk" class="textfield large" value="" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Coverage Information</h3>
+          <div class="section">
+            <table class="form-table" cellspacing="0">
+              <tbody>
+                <tr>
+                  <td><label>Policy Effective Date<span class="required">*</span></label></td>
+                  <td><input name="/Risk/AutomaticRiskData/automaticXML/Coverage/PolicyEffectiveDate@Risk" class="textfield date policyeffective-date" data-format="MM/dd/yyyy"
+                    value="" /><span class="sm-label">(mm/dd/yyyy)</span></td>
+                </tr>
+                <tr>
+                  <td><label>Policy Expiration Date<span class="required">*</span></label></td>
+                  <td><input name="/Risk/AutomaticRiskData/automaticXML/Coverage/PolicyExpirationDate@Risk" class="textfield date policyexpiration-date"
+                    data-format="MM/dd/yyyy" value="" /><span class="sm-label">(mm/dd/yyyy)</span></td>
+                </tr>
+                <tr>
+                  <td><label>Currency<span class="required">*</span></label></td>
+                  <td><select class="sel-currency sel-init" name="/Risk/AutomaticRiskData/automaticXML/Coverage/CurrencyId@Risk" data-selected=""><option value=""
+                        data-symbol="">Select One</option>
+                      <option value="23048690" data-symbol="DZD">Algerian Dinar</option>
+                      <option value="19" data-symbol="ARS">Argentina Pesos</option>
+                      <option value="10" data-symbol="AUD">Australia Dollar</option>
+                      <option value="80" data-symbol="AZN">Azerbaijan Manat</option>
+                      <option value="41" data-symbol="BHD">Bahrain Dinars</option>
+                      <option value="42" data-symbol="BDT">Bangladesh Taka</option>
+                      <option value="61576775" data-symbol="BZD">Belize Dollar</option>
+                      <option value="20" data-symbol="BOB">Bolivia Bolivianos</option>
+                      <option value="21" data-symbol="BRL">Brazil Reais</option>
+                      <option value="4" data-symbol="GBP">British Pounds</option>
+                      <option value="38" data-symbol="BND">Brunei Dollar</option>
+                      <option value="43" data-symbol="BGN">Bulgaria Leva</option>
+                      <option value="44" data-symbol="BIF">Burundi Francs</option>
+                      <option value="7" data-symbol="CAD">Canadian Dollars</option>
+                      <option value="22" data-symbol="CLP">Chile Pesos</option>
+                      <option value="37" data-symbol="UF">Chile Unidad de Fomento</option>
+                      <option value="17" data-symbol="CNY">China Yuan Renminbi</option>
+                      <option value="23" data-symbol="COP">Colombia Pesos</option>
+                      <option value="45" data-symbol="HRK">Croatia Kuna</option>
+                      <option value="46" data-symbol="CZK">Czech Republic Koruny</option>
+                      <option value="14" data-symbol="DKK">Danish Krone</option>
+                      <option value="50023801" data-symbol="XCD">East Caribbean Dollar</option>
+                      <option value="47" data-symbol="EGP">Egypt Pounds</option>
+                      <option value="23048717" data-symbol="ETB">Ethiopian Birr</option>
+                      <option value="8" data-symbol="EUR">Euro</option>
+                      <option value="28182053" data-symbol="FJD">Fijian dollar</option>
+                      <option value="24" data-symbol="HKD">Hong Kong Dollars</option>
+                      <option value="48" data-symbol="HUF">Hungary Forint</option>
+                      <option value="49" data-symbol="INR">India Rupees</option>
+                      <option value="25" data-symbol="IDR">Indonesia Rupiahs</option>
+                      <option value="50" data-symbol="IRR">Iran Rials</option>
+                      <option value="51" data-symbol="IQD">Iraq Dinars</option>
+                      <option value="52" data-symbol="ILS">Israel New Shekels</option>
+                      <option value="3" data-symbol="JPY">Japanese Yen</option>
+                      <option value="53" data-symbol="JOD">Jordan Dinars</option>
+                      <option value="54" data-symbol="KZT">Kazakhstan Tenge</option>
+                      <option value="74466486" data-symbol="KES">Kenyan Shilling</option>
+                      <option value="55" data-symbol="KPW">Korea North Won</option>
+                      <option value="33" data-symbol="KRW">Korea South Won</option>
+                      <option value="56" data-symbol="KGS">Krgyzstan Soms</option>
+                      <option value="57" data-symbol="KWD">Kuwait Dinars</option>
+                      <option value="58" data-symbol="LAK">Laos Kips</option>
+                      <option value="59" data-symbol="LBP">Lebanon Pounds</option>
+                      <option value="60" data-symbol="LYD">Libya Dinars</option>
+                      <option value="61" data-symbol="MKD">Macedonia Denars</option>
+                      <option value="26" data-symbol="MYR">Malaysia Ringgits</option>
+                      <option value="23048720" data-symbol="MRO">Mauritanian Ouguiya</option>
+                      <option value="27" data-symbol="MXN">Mexico Pesos</option>
+                      <option value="62" data-symbol="MAD">Morocco Dirhams</option>
+                      <option value="63" data-symbol="NPR">Nepal Rupees</option>
+                      <option value="28" data-symbol="NZD">New Zealand Dollars</option>
+                      <option value="12" data-symbol="NOK">Norwegian Krona</option>
+                      <option value="64" data-symbol="OMR">Oman Rials</option>
+                      <option value="65" data-symbol="PKR">Pakistan Rupees</option>
+                      <option value="66" data-symbol="PGK">Papua New Guinea Kina</option>
+                      <option value="78606571" data-symbol="PYG">Paraguayan Guarani</option>
+                      <option value="29" data-symbol="PEN">Peru Nuevos Soles</option>
+                      <option value="30" data-symbol="PHP">Philippines Pesos</option>
+                      <option value="31" data-symbol="PLN">Poland Zlotych</option>
+                      <option value="67" data-symbol="QAR">Qatar Rials</option>
+                      <option value="68" data-symbol="RON">Romania New Lei</option>
+                      <option value="15" data-symbol="RUB">Russia Rubles</option>
+                      <option value="69" data-symbol="SAR">Saudi Arabia Riyals</option>
+                      <option value="70" data-symbol="RSD">Serbia Dinars</option>
+                      <option value="16" data-symbol="SGD">Singapore Dollars</option>
+                      <option value="71" data-symbol="SKK">Slovakia Koruny</option>
+                      <option value="23048726" data-symbol="SOS">Somali Shilling</option>
+                      <option value="32" data-symbol="ZAR">South Africa Rand</option>
+                      <option value="72" data-symbol="LKR">Sri Lanka Rupees</option>
+                      <option value="23048723" data-symbol="SDD">Sudanese Dinar</option>
+                      <option value="13" data-symbol="SEK">Swedish Kroner</option>
+                      <option value="11" data-symbol="CHF">Swiss Francs</option>
+                      <option value="73" data-symbol="SYP">Syria Pounds</option>
+                      <option value="18" data-symbol="TWD">Taiwan New Dollars</option>
+                      <option value="34" data-symbol="THB">Thailand Baht</option>
+                      <option value="54796283" data-symbol="TTD">Trinidad and Tobago Dollar</option>
+                      <option value="74" data-symbol="TND">Tunisia Dinars</option>
+                      <option value="39" data-symbol="TRL">Turkish Lira</option>
+                      <option value="43281214" data-symbol="TRY">Turkish Lira</option>
+                      <option value="40" data-symbol="YTL">Turkish New Lira</option>
+                      <option value="1" data-symbol="USD">U.S. Dollars</option>
+                      <option value="75" data-symbol="UAH">Ukraine Hryvnia</option>
+                      <option value="76" data-symbol="AED">United Arab Emirates Dirhams</option>
+                      <option value="35" data-symbol="UYU">Uruguay Pesos</option>
+                      <option value="77" data-symbol="UZS">Uzbekistan Sums</option>
+                      <option value="36" data-symbol="VEB">Venezuela Bolivares</option>
+                      <option value="78" data-symbol="VND">Viet Nam Dong</option>
+                      <option value="79" data-symbol="YER">Yemen Rials</option></select><input type="hidden" class="sel-hidden"
+                    name="/Risk/AutomaticRiskData/automaticXML/Coverage/CurrencyName@Risk" value="" /><input type="hidden" class="symbol-code"
+                    name="/Risk/AutomaticRiskData/automaticXML/Coverage/CurrencyCode@Risk" value="" /></td>
+                </tr>
+                <tr>
+                  <td><label>Rate of Exchange<span class="required">*</span></label></td>
+                  <td>1 USD = <input type="text" name="/Risk/AutomaticRiskData/automaticXML/Coverage/ExRate@Risk" class="textfield number-field i-exchange" value=""
+                    style="width: 159px; margin-right: 3px"/><span class="cur-symbol date-label"></span><span class="sp-exhangelabel date-label" style="padding-left: 15px;"></span><input
+                    type="hidden" class="i-exrateconv" name="/Risk/AutomaticRiskData/automaticXML/Coverage/ExRateConv@Risk" value="" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Transaction Details</h3>
+          <div class="section">
+            <table class="form-table">
+              <tbody>
+                <tr>
+                  <td><label>Transaction Type<span class="required">*</span></label></td>
+                  <td>
+                    <select name="/Risk/AutomaticRiskData/automaticXML/Coverage/TransactionType@Risk" class="sel-init sel-ttype" data-selected="">
+                      <option value="New">New</option>
+                      <option value="Renewal">Renewal</option>
+                      <option value="Flat Cancellation">Flat Cancellation</option>
+                      <option value="Endorsement">Endorsement</option>
+                      <option value="Pro Rata Cancellation">Pro Rata Cancellation</option>
+                      <option value="Adjustment/correction to MDA#:">Adjustment/correction to MDA#:</option>
+                    </select> &nbsp; <input type="text" name="/Risk/AutomaticRiskData/automaticXML/Coverage/MDA@Risk" id="i-adjust" class="textfield small i-mda disabled" value="" disabled="" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Covered Locations</h3>
+          <div class="section">
+            <div class="marg-bottom">
+              <label class="norm"><input type="radio" class="i-loctype" value="listed" name="/Risk/AutomaticRiskData/automaticXML/Locations/LocationType@Risk" checked="" />
+                As Listed &nbsp;&nbsp;&nbsp; <input type="radio" class="i-loctype" value="attach" name="/Risk/AutomaticRiskData/automaticXML/Locations/LocationType@Risk"/>
+                Attach Schedule of Locations </label>
+            </div>
+           
+            <div class="d-loc">
+              <table class="border-table tbl-add">
+                <thead>
+                  <tr>
+                    <th class="text-a-c">No.</th>
+                    <th>Address<span class="required">*</span></th>
+                    <th><span></span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-a-c v-top"><span class="position">1</span></td>
+                    <td class="v-top"><textarea name="/Risk/AutomaticRiskData/automaticXML/Locations/Location[1]/Address@Risk" rows="3" cols="45" class="textarea loc-area"></textarea></td>
+                    <td class="v-top"><a href="#deletelayer" class="btna a-delete delete-location" title="Delete this Location"><span>Delete</span></a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="clearfix marg-top">
+                <a href="#addlocation" class="btna float-l a-add add-location" title="Add Location"><span>Add Location</span></a>
+              </div>
+            </div>
+            <ul class="list-checkradio marg-top">
+              <li>Coverages <span class="infotext">(Check all that apply)</span></li>
+              <li><label class="norm"><input type="checkbox" class="u-coveragetype" value="Property" name="/Risk/AutomaticRiskData/automaticXML/Coverage/Type[1]/Name@Risk"/> Property </label></li>
+              <li><label class="norm"><input type="checkbox" class="u-coveragetype" value="Casualty" name="/Risk/AutomaticRiskData/automaticXML/Coverage/Type[2]/Name@Risk"/> Casualty </label></li>
+              <li><label class="norm"><input type="checkbox" class="u-coveragetype" value="Cargo" name="/Risk/AutomaticRiskData/automaticXML/Coverage/Type[3]/Name@Risk"/> Cargo </label></li>
+            </ul>
+          </div>
+        </div>
+        <div class="box-btm"></div>
+      </div>
+      
+      
+      <div class="box  btmspace " id="">
+        <div class="box-top"></div>
+        <div class="box-middle">
+          <h2>Premium</h2>
+          <h3>Premiums and Deductions</h3>
+          <div class="section">
+            <table class="border-table marg-top tbl-premium">
+              <thead>
+                <tr>
+                  <th><span></span></th>
+                  <th class="text-a-r"><span>(%)</span></th>
+                  <th class="text-a-r">Amount <span>(USD)</span></th>
+                  <th class="text-a-r">Amount <span>(<span class="sp-consymbol"></span>)
+                  </span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>(a)</strong> Direct Written Premium (DWP)</td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white small text-a-r" name="" value="100%" readonly="" /></td>
+                  <td>
+                    <input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/DirectAmt@Risk" class="textfield currency-field text-a-r prem-a-amt" value="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field" name="" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>(b)</strong> Local retention</td>
+                  <td>
+                    <input type="text" name="" class="textfield small percentage-field text-a-r prem-b-percent prem-percent" value="" />
+                  </td>
+                  <td>
+                    <input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/RetAmt@Risk" class="textfield currency-field text-a-r  prem-b-amt per-calc" value="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field prem-b-exc" name="" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>(c)</strong> Local compulsory cessions</td>
+                  <td>
+                    <input type="text" name="" class="textfield small percentage-field text-a-r prem-c-percent prem-percent" value="" />
+                  </td>
+                  <td>
+                    <input type="text" name="" class="textfield currency-field text-a-r  prem-c-amt per-calc" value="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field prem-c-exc" name="" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>(d)</strong> Premiums ceded to CNA (a less (b+c))</td>
+                  <td>
+                    <input type="text" tabindex="-1" name="" class="textfield readonly-white small percentage-field text-a-r prem-d-percent prem-percent" value="" readonly="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" name="" class="textfield readonly-white currency-field text-a-r  prem-d-amt" value="" readonly="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field prem-d-exc"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/PremCededExc@Risk" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Less</strong></td>
+                  <th><span></span></th>
+                  <th><span></span></th>
+                  <th><span></span></th>
+                </tr>
+                <tr>
+                  <td><strong>(e)</strong> Override commissions (% of d)</td>
+                  <td>
+                    <input type="text" name="" class="textfield small percentage-field text-a-r prem-e-percent" value="" />
+                  </td>
+                  <td>
+                    <input type="text" name="" class="textfield currency-field text-a-r  prem-e-amt per-calc" value="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field" name="" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>(f)</strong> Brokerage commissions (% of d)</td>
+                  <td>
+                    <input type="text" name="" class="textfield small percentage-field text-a-r prem-f-percent" value="" />
+                  </td>
+                  <td>
+                    <input type="text" name="" class="textfield currency-field text-a-r  prem-f-amt per-calc" value="" />
+                  </td>
+                  <td>
+                    <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field" name="" value="" readonly="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>(g)</strong> Reinsurance charges assessed on CNA</td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/ChargePct@Risk"
+                    class="textfield small percentage-field text-a-r prem-g-percent prem-percent" value="" /></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/ChargeAmt@Risk" class="textfield currency-field text-a-r  prem-g-amt per-calc"
+                    value=""/></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field"
+                    name="" value="" readonly="" /></td>
+                </tr>
+                <tr class="tr-deduct">
+                  <td><strong>(h)</strong> Total deductions (e through g)</td>
+                  <td><span></span></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r  prem-h-amt"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/DeductAmt@Risk" value="" readonly="" /></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/DeductExc@Risk" value="" readonly="" /></td>
+                </tr>
+                <tr class="tr-premium">
+                  <td><strong>(i)</strong> Net premiums (d less h)</td>
+                  <td><span></span></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r  prem-i-amt"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/NetAmt@Risk" value="" readonly="" /></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/NetExc@Risk" value="" readonly="" /></td>
+                </tr>
+                <tr>
+                  <td><strong>(j)</strong> Premium reserve withheld (% of d)</td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/WithPct@Risk" class="textfield small percentage-field text-a-r prem-j-percent"
+                    value="" /></td>
+                  <td><input type="text" name="/Risk/AutomaticRiskData/automaticXML/Premium/WithAmt@Risk" class="textfield currency-field text-a-r  per-calc prem-j-amt" value="" /></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/WithExc@Risk" value="" readonly="" /></td>
+                </tr>
+                <tr class="tr-after">
+                  <td><strong>(k)</strong> Net premiums after premium reserve (i less j)</td>
+                  <td><span></span></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r  prem-k-amt"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/ResAmt@Risk" value="" readonly="" /></td>
+                  <td><input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field"
+                    name="/Risk/AutomaticRiskData/automaticXML/Premium/ResExc@Risk" value="" readonly="" /></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              <strong>All premiums are to be collected from the local broker within 30 days of inception unless local law prohibits. </strong>
+            </p>
+          <div class="infotext">The premiums and deductions above do not include local taxes, charges and fees assessed on the local insured which are collected in addition
+            to the direct written premium (DWP). If locally collected, the fronting facility will retain the taxes, charges and fees and remit to the proper authorities. If the
+            local taxes, charges and fees are collected in the U.S., the funds will be sent to the fronting facility from CNA in addition to the premium collected. The fronting
+            facility will then remit the funds to the proper authorities.</div>
+          <div class="marg-top">
+            <span>Premium collection &nbsp;</span><select class="sel-collected sel-init" name="/Risk/AutomaticRiskData/automaticXML/Premium/Collected@Risk" data-selected=""><option
+                value="">Select One</option>
+              <option value="Premium Collected Locally">Premium Collected Locally</option>
+              <option value="Premium Collected Centrally">Premium Collected Centrally</option></select>
+          </div>
+          </div>
+          <h3>Premium Payment</h3>
+            <div class="section">
+              <p>
+                Number of premium payments expected: <input type="text" name="" class="textfield small i-payments number-field" value=""/>
+              </p>
+              <table class="border-table marg-top tbl-add" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th class="text-a-c">No.</th>
+                    <th>Date Expected</th>
+                    <th class="text-a-r">Amount <span>(USD)</span></th>
+                    <th class="text-a-r">Amount <span>(<span class="sp-consymbol"></span>)
+                    </span></th>
+                    <th>Date Collected</th>
+                    <th><span></span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-a-c v-top"><span class="position">1</span></td>
+                    <td class="v-top">
+                      <input name="" class="textfield date date-field" data-format="MM/dd/yyyy" value=""/>
+                    </td>
+                    <td class="v-top">
+                      <input type="text" name="" class="textfield currency-field text-a-r conv-field" value=""/>
+                    </td>
+                    <td class="v-top">
+                      <input type="text" tabindex="-1" class="textfield readonly-white currency-field text-a-r exchange-field" name="" value="" readonly=""/>
+                    </td>
+                    <td class="v-top">
+                      <input name="" class="textfield date date-field" data-format="MM/dd/yyyy" value=""/>
+                    </td>
+                    <td class="v-top"><a href="#deleteEndorsement" class="btna a-delete" title="Delete this Endorsement"><span>Delete</span></a></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="clearfix marg-top">
+                <a href="#addpremium" class="btna float-l a-add a-premium" title="Add Another Premium"><span>Add Premium</span></a>
+              </div>
+              
+            </div>
+          </div>
+      <div class="box-btm"></div>
+    </div>
+      <div class="btn-container clearfix">
+<button class="btn btn-main btn-review" type="button" title="Review Record"><span><b></b>Review Record &gt;</span></button><button class="btn btn-draft" type="button" id="savebutton" title="Save"><span><b></b>Save</span></button><a class="btna btn-cancelthis" href="/home" title="Cancel"><span><b></b>Cancel</span></a>
+</div>
+    </div>
+
+      
+
+
+
+
+      </div>
+</body>
+</html>
