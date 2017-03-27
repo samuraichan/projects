@@ -1,16 +1,24 @@
 
 package starter.data.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.Type;
 
+import starter.data.entity.listener.BaseEntityListener;
+
 @MappedSuperclass
+@EntityListeners(BaseEntityListener.class)
 public class BaseEntity {
 
   @Id
@@ -21,9 +29,17 @@ public class BaseEntity {
   @Type(type="yes_no")
   private boolean activeFlag;
   
+  @Column(name="created_date")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date createdDate;
+  
+  @Column(name="updated_date")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date updatedDate;
+  
   @Version
   @Column(name="version_number")
-  protected Integer version = 1;
+  private Integer version = 1;
 
   public Integer getId() {
     return id;
@@ -51,5 +67,21 @@ public class BaseEntity {
 
   public void setActiveFlag(boolean activeFlag) {
     this.activeFlag = activeFlag;
+  }
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
+
+  public Date getUpdatedDate() {
+    return updatedDate;
+  }
+
+  public void setUpdatedDate(Date updatedDate) {
+    this.updatedDate = updatedDate;
   }
 }

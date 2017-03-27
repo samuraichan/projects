@@ -1,5 +1,11 @@
 DROP TABLE IF EXISTS phone_number CASCADE;
 DROP TABLE IF EXISTS phone_number_m CASCADE;
+DROP TABLE IF EXISTS phone_number_owner CASCADE;
+DROP TABLE IF EXISTS phone_number_owner_m CASCADE;
+DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS address_m CASCADE;
+DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS person_m CASCADE;
 DROP TABLE IF EXISTS system_revision CASCADE;
 
 DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(strategy = GenerationType.SEQUENCE) to work
@@ -7,20 +13,105 @@ DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(stra
 CREATE TABLE phone_number 
 (
   id SERIAL PRIMARY KEY,
-  phone VARCHAR(20),
+  number VARCHAR(20),
   type INTEGER,
-  created_date date,
+  created_date timestamp,
+  updated_date timestamp,
   active_flag VARCHAR(1),
   version_number INTEGER
 );
 
 CREATE TABLE phone_number_m
 (
+  phone_number_m_id SERIAL PRIMARY KEY, -- required by hibernate
   id SERIAL,
-  phone_number_id SERIAL PRIMARY KEY, -- required by hibernate
-  phone VARCHAR(20),
+  number VARCHAR(20),
   type INTEGER,
-  created_date date,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE phone_number_owner 
+(
+  id SERIAL PRIMARY KEY,
+  owner_id INTEGER,
+  phone_number_id INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1) DEFAULT 'N',
+  version_number INTEGER
+);
+
+CREATE TABLE phone_number_owner_m
+(
+  phone_number_owner_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  owner_id INTEGER,
+  phone_number_id INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE address 
+(
+  id SERIAL PRIMARY KEY,
+  owner_id INTEGER,
+  street VARCHAR(50),
+  state VARCHAR(50),
+  city VARCHAR(50),
+  zip VARCHAR(50),
+  type INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE address_m
+(
+  address_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  owner_id INTEGER,
+  street VARCHAR(50),
+  state VARCHAR(50),
+  city VARCHAR(50),
+  zip VARCHAR(50),
+  type INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE person 
+(
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(20),
+  last_name VARCHAR(20),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE person_m
+(
+  person_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  first_name VARCHAR(20),
+  last_name VARCHAR(20),
+  created_date timestamp,
+  updated_date timestamp,
   active_flag VARCHAR(1),
   version_number INTEGER,
   rev INTEGER, -- required by hibernate
