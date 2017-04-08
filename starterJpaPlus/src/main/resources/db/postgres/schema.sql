@@ -6,9 +6,61 @@ DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS address_m CASCADE;
 DROP TABLE IF EXISTS person CASCADE;
 DROP TABLE IF EXISTS person_m CASCADE;
+DROP TABLE IF EXISTS phone_type CASCADE;
+DROP TABLE IF EXISTS phone_type_m CASCADE;
+DROP TABLE IF EXISTS phone_value CASCADE;
+DROP TABLE IF EXISTS phone_value_m CASCADE;
 DROP TABLE IF EXISTS system_revision CASCADE;
 
 DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(strategy = GenerationType.SEQUENCE) to work
+
+CREATE TABLE phone_type
+(
+  id SERIAL PRIMARY KEY,
+  value INTEGER,
+  description VARCHAR(20),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE phone_type_m
+(
+  phone_type_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  value INTEGER,
+  description VARCHAR(20),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE phone_value
+(
+  id SERIAL PRIMARY KEY,
+  value INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE phone_value_m
+(
+  phone_value_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  value INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
 
 CREATE TABLE phone_number 
 (
