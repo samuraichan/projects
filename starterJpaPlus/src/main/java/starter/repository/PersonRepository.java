@@ -7,4 +7,6 @@ import starter.data.entity.Person;
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 
   public Person findByLastName(String lastName);
+  
+  public Person findByLastNameLike(String lastName);
 }

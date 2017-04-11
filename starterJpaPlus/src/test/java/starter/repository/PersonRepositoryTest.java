@@ -2,8 +2,10 @@ package starter.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +25,22 @@ public class PersonRepositoryTest {
   private PersonRepository personRepository;
   
   @Test
+  public void testMyDate() {
+    Person p = new Person("Raul", "Chiariss", null, true);
+    p.setTimestamp(new Timestamp(new Date().getTime()));
+    personRepository.save(p);
+  }
+  
+  @Test
+  public void testLikeExpressionWithInternationalChars() {
+    Person p = new Person("Raul", "翻訳するテキストや", null, true);
+    personRepository.save(p);
+    
+    p = personRepository.findByLastNameLike("%トや%");
+    assertThat(p.getId()).isNotNull();
+  }
+  
+  @Test
   public void testRepositoryEmpty() {
     Person p = new Person("Raul", "Chiari", null, true);
     personRepository.save(p);
@@ -34,11 +52,16 @@ public class PersonRepositoryTest {
   @Test
   public void testAddressesIsNullOrEmpty() {
     Person p = new Person("Raul", "Chiari1", null, true);
+    p.setAge(40);
     p = personRepository.save(p);
     assertThat(p.getAddresses()).isNull();
     
     p = personRepository.findByLastName("Chiari1");
     assertThat(p.getAddresses()).isEmpty();
+    
+    //p.setLastName("Chiari Has been modified");
+    p.setAge(41);
+    personRepository.save(p);
   }
   
   @Test

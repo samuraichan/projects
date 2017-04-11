@@ -149,7 +149,9 @@ CREATE TABLE person
 (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(20),
-  last_name VARCHAR(20),
+  last_name VARCHAR(120),
+  my_date timestamp,
+  age INTEGER,
   created_date timestamp,
   updated_date timestamp,
   active_flag VARCHAR(1),
@@ -161,7 +163,9 @@ CREATE TABLE person_m
   person_m_id SERIAL PRIMARY KEY, -- required by hibernate
   id SERIAL,
   first_name VARCHAR(20),
-  last_name VARCHAR(20),
+  last_name VARCHAR(120),
+  my_date timestamp,
+  age INTEGER,
   created_date timestamp,
   updated_date timestamp,
   active_flag VARCHAR(1),
