@@ -10,8 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
@@ -40,6 +44,16 @@ public class Person extends BaseEntity {
   
   @Column(name="my_date") // upon using java.sql.TimeStamp hibernate does not need you to define a @Temporal (since JDBC driver's mapping implictly handles this)
   private Timestamp timestamp;
+  
+  @Column(name="another_created_date")
+  @Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp // instead of doing a listener (like created date on Base Entity) hibernate provides a sweet annotation instead
+  private java.util.Date anotherDate;
+  
+  @Column(name="another_update_date")
+  @Temporal(TemporalType.TIMESTAMP)
+  @UpdateTimestamp // instead of doing a listener (like created date on Base Entity) hibernate provides a sweet annotation instead
+  private java.util.Date anotherUpdateDate;
   
   private Integer age;
 
@@ -104,5 +118,13 @@ public class Person extends BaseEntity {
 
   public void setAge(Integer age) {
     this.age = age;
+  }
+  
+  public java.util.Date getAnotherDate() {
+    return anotherDate;
+  }
+
+  public java.util.Date getAnotherUpdateDate() {
+    return anotherUpdateDate;
   }
 }
