@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS phone_number CASCADE;
 DROP TABLE IF EXISTS phone_number_m CASCADE;
 DROP TABLE IF EXISTS phone_number_owner CASCADE;
 DROP TABLE IF EXISTS phone_number_owner_m CASCADE;
+DROP TABLE IF EXISTS contact CASCADE;
+DROP TABLE IF EXISTS contact_m CASCADE;
 DROP TABLE IF EXISTS address CASCADE;
 DROP TABLE IF EXISTS address_m CASCADE;
 DROP TABLE IF EXISTS person CASCADE;
@@ -170,6 +172,33 @@ CREATE TABLE person_m
   another_created_date timestamp,
   another_update_date timestamp,
   age INTEGER,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER,
+  rev INTEGER, -- required by hibernate
+  revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE contact
+(
+  id SERIAL PRIMARY KEY,
+  street VARCHAR(20),
+  city VARCHAR(20),
+  postal_codee VARCHAR(20),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE contact_m
+(
+  phone_type_m_id SERIAL PRIMARY KEY, -- required by hibernate
+  id SERIAL,
+  street VARCHAR(20),
+  city VARCHAR(20),
+  postal_codee VARCHAR(20),
   created_date timestamp,
   updated_date timestamp,
   active_flag VARCHAR(1),
