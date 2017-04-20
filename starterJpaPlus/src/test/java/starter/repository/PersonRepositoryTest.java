@@ -6,7 +6,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +31,36 @@ public class PersonRepositoryTest {
 
   @Autowired
   private PersonRepository personRepository;
+  
+  @PersistenceContext
+  private EntityManager em;
+   
+  @Test
+  public void testHibernateSessionCacheNoTransaction() {
+    Person p1 = personRepository.findOne(1); // under the covers Spring Data uses EM while entity manager uses Hibernate's Session Impl
+    Person p2 = personRepository.findOne(1);
+    assertThat(p1).isNotEqualTo(p2);
+    
+    Set<Person> person = new HashSet<Person>();
+    person.add(p1);
+    person.add(p2);
+    assertThat(person).size().isEqualTo(2);
+  }
+  
+  @Test
+  @Transactional
+  public void testHibernateSessionCacheInTransaction() {
+    Person p1 = personRepository.findOne(1);  // under the covers Spring Data uses EM while entity manager uses Hibernate's Session Impl
+    Person p2 = personRepository.findOne(1);
+    assertThat(p1).isEqualTo(p2); // within a Trx, the Session properly caches the first load on Person
+    
+    Set<Person> person = new HashSet<Person>();
+    person.add(p1);
+    person.add(p2);
+    assertThat(person).size().isEqualTo(1);
+  }
+  
+  
   
   @Test
   public void testMyDate() {
