@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import starter.data.entity.Address;
 import starter.data.entity.Person;
+import starter.data.model.IdAndDescription;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.DEFINED_PORT)
@@ -58,6 +59,18 @@ public class PersonRepositoryTest {
     person.add(p1);
     person.add(p2);
     assertThat(person).size().isEqualTo(1);
+  }
+  
+  @Test
+  public void testHashCodeEquals() {
+    IdAndDescription one = new IdAndDescription(1, "dude");
+    IdAndDescription two = new IdAndDescription(1, "dude");
+    assertThat(one).isNotEqualTo(two);
+    
+    Set<IdAndDescription> idAndDescriptions = new HashSet<IdAndDescription>();
+    idAndDescriptions.add(one);
+    idAndDescriptions.add(two);
+    assertThat(idAndDescriptions).size().isEqualTo(2);
   }
   
   

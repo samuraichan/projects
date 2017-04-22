@@ -127,4 +127,14 @@ public class Person extends BaseEntity {
   public java.util.Date getAnotherUpdateDate() {
     return anotherUpdateDate;
   }
+  
+  @Override
+  public boolean equals(Object o) {
+    return super.equals(o);
+  }
+  
+  @Override
+  public int hashCode() {
+    return 21;
+  }
 }
