@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -46,6 +47,11 @@ public class PersonRepositoryTest {
     person.add(p1);
     person.add(p2);
     assertThat(person).size().isEqualTo(2);
+    
+    Collection<Person> persons = new ArrayList<Person>();
+    persons.add(p1);
+    persons.add(p2);
+    assertThat(person).contains(p1).contains(p2);
   }
   
   @Test
@@ -65,12 +71,12 @@ public class PersonRepositoryTest {
   public void testHashCodeEquals() {
     IdAndDescription one = new IdAndDescription(1, "dude");
     IdAndDescription two = new IdAndDescription(1, "dude");
-    assertThat(one).isNotEqualTo(two);
+    assertThat(one).isEqualTo(two); // i overrode the equals operation
     
     Set<IdAndDescription> idAndDescriptions = new HashSet<IdAndDescription>();
     idAndDescriptions.add(one);
     idAndDescriptions.add(two);
-    assertThat(idAndDescriptions).size().isEqualTo(2);
+    assertThat(idAndDescriptions).size().isNotEqualTo(2);
   }
   
   

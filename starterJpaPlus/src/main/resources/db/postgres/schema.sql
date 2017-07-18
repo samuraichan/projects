@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS phone_value CASCADE;
 DROP TABLE IF EXISTS phone_value_m CASCADE;
 DROP TABLE IF EXISTS task CASCADE;
 DROP TABLE IF EXISTS task_m CASCADE;
+DROP TABLE IF EXISTS market_class CASCADE;
 DROP TABLE IF EXISTS system_revision CASCADE;
 
 DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(strategy = GenerationType.SEQUENCE) to work
@@ -230,6 +231,18 @@ CREATE TABLE contact_m
   version_number INTEGER,
   rev INTEGER, -- required by hibernate
   revtype SMALLINT -- required by hibernate
+);
+
+CREATE TABLE market_class
+(
+  id SERIAL PRIMARY KEY,
+  type_id INTEGER,
+  name VARCHAR(20),
+  selected VARCHAR(1),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
 );
 
 -- see StarterRevisioinEntity.java (hibernate provides a default REVINFO tale if 
