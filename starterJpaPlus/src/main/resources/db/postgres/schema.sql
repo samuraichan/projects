@@ -17,7 +17,46 @@ DROP TABLE IF EXISTS task_m CASCADE;
 DROP TABLE IF EXISTS market_class CASCADE;
 DROP TABLE IF EXISTS system_revision CASCADE;
 
+DROP TABLE IF EXISTS quote CASCADE;
+DROP TABLE IF EXISTS risk_body CASCADE;
+DROP TABLE IF EXISTS risk_header CASCADE;
+DROP TABLE IF EXISTS status CASCADE; 
+
 DROP SEQUENCE IF EXISTS hibernate_sequence; -- in order for @GeneratedValue(strategy = GenerationType.SEQUENCE) to work
+
+CREATE TABLE quote
+(
+  id SERIAL PRIMARY KEY,
+  submission_id integer,
+  net_premium NUMERIC(10,2),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE risk_body
+(
+  id SERIAL PRIMARY KEY,
+  risk_id integer,
+  status_id SMALLINT,
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
+CREATE TABLE risk_header
+(
+  id SERIAL PRIMARY KEY,
+  status_id SMALLINT,
+  name VARCHAR(25),
+  created_date timestamp,
+  updated_date timestamp,
+  active_flag VARCHAR(1),
+  version_number INTEGER
+);
+
 
 CREATE TABLE task
 (

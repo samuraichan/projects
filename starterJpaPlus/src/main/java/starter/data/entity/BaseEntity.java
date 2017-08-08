@@ -13,12 +13,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import starter.data.entity.listener.BaseEntityListener;
 
 @MappedSuperclass
-@EntityListeners(BaseEntityListener.class)
+//@EntityListeners(BaseEntityListener.class)
 public class BaseEntity {
 
   @Id
@@ -30,11 +32,13 @@ public class BaseEntity {
   private boolean activeFlag;
   
   @Column(name="created_date")
-  @Temporal(TemporalType.TIMESTAMP)
+  //@Temporal(TemporalType.TIMESTAMP)
+  @CreationTimestamp
   private Date createdDate;
   
   @Column(name="updated_date")
-  @Temporal(TemporalType.TIMESTAMP)
+  //@Temporal(TemporalType.TIMESTAMP)
+  @UpdateTimestamp
   private Date updatedDate;
   
   @Version
